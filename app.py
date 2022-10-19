@@ -49,7 +49,7 @@ def index():
 def view_art(art_hash):
     return render_template_string('<img src= "{{full_res}}">', full_res= download_art(art_hash))
 
-if __name__ == "__main__":
-    app.run()
+#if __name__ == "__main__":
+#    app.run()
     
 
