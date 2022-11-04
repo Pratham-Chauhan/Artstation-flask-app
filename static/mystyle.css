@@ -1,3 +1,9 @@
+#wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+
 .container {
   display: inline-grid;
   grid-template-columns: repeat(3, 1fr);
@@ -15,3 +21,18 @@
   }
 }
 
+#heading {
+  background-color: black;
+  color: white;
+  display: flex;
+  align-items: center;
+  height: 67px;
+  font: bold 27px sans-serif;
+  padding-left: 16px;
+  margin-bottom: 10px;
+}
+
+.shuffle {
+  width: 67px;
+  margin: auto;
+}

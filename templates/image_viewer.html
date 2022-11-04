@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Art Viewer</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css"> -->
+    <script>
+        var count=0;
+        function fullview() {
+        // console.log('you clicked!');
+        if (count==0) {
+            $("#viewer").css({"width": "auto"});
+            count =1;
+        } else {
+            $("#viewer").css({"width": "100%"});
+            count=0;
+            }
+        }
+        </script>
+    <style type="text/css">
+    .button {
+        /*padding: 20px;*/
+        border-style: none;
+        margin: 10px;
+        font-size: 13px;
+        width: 135px;
+        height: 40px;
+        background-color: gainsboro;
+    }
+
+    .button:focus {
+        background-color: #878787;
+    }
+
+    div.menu {
+        display: flex;
+        justify-content: center;
+    }
+
+    img {
+        /*scale: 50%;*/
+        transform-origin: top left;
+        /*margin: 12px;*/
+        /*padding: 11px;*/
+        /*border-radius: 7px;*/
+        /*border-style: solid;*/
+        border-width: 13px;
+        /*border-color: hsl(0deg 0% 7%);*/
+        /*background-color: hsl(0deg 0% 18%);*/
+        width: 100%;
+    }
+
+    #wrapper {
+        display: block;
+        /*overflow: scroll;
+        height: 100vh;
+        }
+    </style>
+</head>
+
+<body>
+    <div class='menu'>
+        <button class="button" onclick="$('#viewer').attr('src','{{ full_url[0] }}')">Cover Img</button>
+        <button class="button" onclick="$('#viewer').attr('src','{{ full_url[1] }}')">Image 1</button>
+        <button class="button" onclick="$('#viewer').attr('src','{{ full_url[2] }}')">HD</button>
+    </div>
+    <div id="wrapper">
+        <img id='viewer' src='{{ full_url[0] }}' onclick='fullview()'>
+        <!-- <p>{{ full_url }}</p> -->
+    </div>
+</body>
+
+</html>
