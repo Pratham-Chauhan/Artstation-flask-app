@@ -1,6 +1,5 @@
 from flask import Flask, render_template, render_template_string, redirect
 import requests as r
-# from random import randint
 import random
 
 tdata = []
@@ -74,6 +73,6 @@ def view_art(art_hash):
     return render_template("image_viewer.html", full_url = download_art(art_hash))
 
 if __name__ == "__main__":
-    app.run(host="192.168.43.55", debug=True)
+    app.run()
     
 
