@@ -72,3 +72,5 @@ def go_to_page():
 @app.route('/view/<art_hash>')
 def view_art(art_hash):
     return render_template("image_viewer.html", full_url = download_art(art_hash))
+
+# app.run()
