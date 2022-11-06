@@ -72,7 +72,7 @@ def go_to_page():
 def view_art(art_hash):
     return render_template("image_viewer.html", full_url = download_art(art_hash))
 
-if __name__ == "__main__":
-    app.run()
+# if __name__ == "__main__":
+#     app.run()
     
 
