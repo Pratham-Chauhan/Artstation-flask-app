@@ -18,12 +18,21 @@
     </div>
     <div id="wrapper">
       <div class="container">
+
         {% for art in urls %}
+        <div class="art {{ art.hash }}">
           <a href="/view/{{ art.hash }}" target="_blank">
-            <div class="art {{ art.hash }}">
               <img src={{ art.URL }}>
-            </div>
           </a>
+
+          <div class="artist">
+            <img src="{{ art.artist_img }}">
+            <a href="https://www.artstation.com/{{ art.artist_url }}" target="_blank">{{ art.artist }}</a>
+          </div>
+        </div>
+
+
+
         {% endfor %}
       </div>
     </div>

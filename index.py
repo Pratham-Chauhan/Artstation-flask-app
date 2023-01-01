@@ -21,20 +21,27 @@ def Trending_Art_Extract(page_no):
             print('images fetch:', len(tdata))
             # refresh = 0
         else: 
-            print("Status Code is Wrong:", tdata.status_code)
+            print("Status Code is Wrong : ", tdata.status_code)
             return
         
     else:
         print('refresh is off'.title())
 
     
-    for rn in random.sample(range(100), 30 ):
-        artwork = tdata[rn]
-        art_hash = artwork['hash_id']
-        cover_url = artwork['smaller_square_cover_url']
+    for rn in random.sample(range(100), 30):
+        artwork = tdata[rn] #selecting art at random 
 
-        art_urls.append({'URL': cover_url, 'hash': art_hash})
+
+        art_urls.append({'URL': artwork['smaller_square_cover_url'], 
+                        'hash': artwork['hash_id'],
+                        'title': artwork['title'],
+                        # artist
+                        'artist': artwork['user']['full_name'],
+                        'artist_url': artwork['user']['username'],
+                        'artist_img': artwork['user']['medium_avatar_url']})
         
+
+
         # print(artwork['user']['username'],'-', artwork['title'],'\n')
         # print('Hash:',art_hash) 
 
@@ -60,7 +67,7 @@ app = Flask(__name__)
 @app.route('/<int:n>')
 def index(n):
     Trending_Art_Extract(n)
-    return render_template('artstation_gallery.html', urls=art_urls, page=n)
+    return render_template('home.html', urls=art_urls, page=n)
 
 @app.route('/')
 def go_to_page():
@@ -73,4 +80,7 @@ def go_to_page():
 def view_art(art_hash):
     return render_template("image_viewer.html", full_url = download_art(art_hash))
 
-# app.run()
+if __name__ == "__main__":
+    app.run(host="192.168.43.55", debug=True)
+    
+
