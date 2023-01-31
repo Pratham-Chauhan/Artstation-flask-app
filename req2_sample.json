@@ -1,0 +1,142 @@
+{
+    "liked": false,
+    "tags": [
+        "girl",
+        "witch",
+        "fighter",
+        "warrior"
+    ],
+    "hide_as_adult": false,
+    "visible_on_artstation": true,
+    "assets": [
+        {
+            "has_image": true,
+            "has_embedded_player": false,
+            "player_embedded": null,
+            "oembed": null,
+            "id": 55036475,
+            "title": "",
+            "title_formatted": "",
+            "image_url": "https://cdnb.artstation.com/p/assets/images/images/055/036/475/large/khoa-viet-character-explore-final.jpg?1665982236",
+            "width": 5294,
+            "height": 2751,
+            "position": 0,
+            "asset_type": "image",
+            "viewport_constraint_type": "maximized"
+        },
+        {
+            "has_image": true,
+            "has_embedded_player": false,
+            "player_embedded": null,
+            "oembed": null,
+            "id": 55036476,
+            "title": "early idea",
+            "title_formatted": "<div class=\"asset-caption\"><p>early idea</p></div>",
+            "image_url": "https://cdna.artstation.com/p/assets/images/images/055/036/476/large/khoa-viet-character-explore-wip2a.jpg?1665982023",
+            "width": 4472,
+            "height": 3000,
+            "position": 1,
+            "asset_type": "image",
+            "viewport_constraint_type": "constrained"
+        },
+        {
+            "has_image": true,
+            "has_embedded_player": false,
+            "player_embedded": null,
+            "oembed": null,
+            "id": 55036501,
+            "title": "",
+            "title_formatted": "",
+            "image_url": "https://cdnb.artstation.com/p/assets/images/images/055/036/501/large/khoa-viet-character-explore-wip2c.jpg?1665982156",
+            "width": 4012,
+            "height": 3000,
+            "position": 2,
+            "asset_type": "image",
+            "viewport_constraint_type": "constrained"
+        },
+        {
+            "has_image": true,
+            "has_embedded_player": false,
+            "player_embedded": null,
+            "oembed": null,
+            "id": 55036478,
+            "title": "",
+            "title_formatted": "",
+            "image_url": "https://cdna.artstation.com/p/assets/images/images/055/036/478/large/khoa-viet-character-explore-wip3.jpg?1665982036",
+            "width": 4000,
+            "height": 2201,
+            "position": 3,
+            "asset_type": "image",
+            "viewport_constraint_type": "constrained"
+        }
+    ],
+    "collections": [],
+    "user": {
+        "followed": false,
+        "following_back": false,
+        "blocked": false,
+        "is_staff": false,
+        "is_plus_member": false,
+        "is_studio_account": false,
+        "is_school_account": false,
+        "id": 114034,
+        "username": "vietkhoa",
+        "headline": "Freelance Concept Artist - Not Available",
+        "full_name": "Khoa Viet",
+        "permalink": "https://www.artstation.com/vietkhoa",
+        "medium_avatar_url": "https://cdna.artstation.com/p/users/avatars/000/114/034/medium/3672fe98dbc702f2b7cebb9bc2623969.jpg?1620874168",
+        "large_avatar_url": "https://cdna.artstation.com/p/users/avatars/000/114/034/large/3672fe98dbc702f2b7cebb9bc2623969.jpg?1620874168",
+        "small_cover_url": "https://cdna.artstation.com/p/users/covers/000/114/034/small/cdd0018e28c369f99bb1215e49d06884.jpg?1634630337",
+        "pro_member": true
+    },
+    "medium": {
+        "name": "Digital 2D",
+        "id": 1
+    },
+    "mediums": [
+        {
+            "name": "Digital 2D",
+            "id": 1
+        }
+    ],
+    "categories": [
+        {
+            "name": "Fantasy",
+            "id": 2
+        },
+        {
+            "name": "Concept Art",
+            "id": 3
+        },
+        {
+            "name": "Character Design",
+            "id": 65
+        }
+    ],
+    "software_items": [
+        {
+            "icon_url": "https://cdna.artstation.com/p/softwares/icons/000/000/032/default/Photoshop.png?1608144074",
+            "name": "Photoshop"
+        }
+    ],
+    "id": 14051329,
+    "user_id": 114034,
+    "title": "Skylandia characters",
+    "description": "<p>Work done for a client last year</p>",
+    "description_html": "<p>Work done for a client last year</p>",
+    "created_at": "2022-10-16T23:51:54.023-05:00",
+    "updated_at": "2022-10-17T04:04:20.166-05:00",
+    "views_count": 1634,
+    "likes_count": 426,
+    "comments_count": 10,
+    "permalink": "https://www.artstation.com/artwork/2qmANK",
+    "cover_url": "https://cdnb.artstation.com/p/assets/images/images/055/036/475/medium/khoa-viet-character-explore-final.jpg?1665982236",
+    "published_at": "2022-10-17T00:55:43.766-05:00",
+    "editor_pick": false,
+    "adult_content": false,
+    "admin_adult_content": false,
+    "slug": "skylandia-character",
+    "suppressed": false,
+    "hash_id": "2qmANK",
+    "visible": true
+}

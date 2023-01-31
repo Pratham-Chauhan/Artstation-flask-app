@@ -45,20 +45,24 @@
     img {
         /*scale: 50%;*/
         transform-origin: top left;
+        border: groove;
         /*margin: 12px;*/
         /*padding: 11px;*/
         /*border-radius: 7px;*/
         /*border-style: solid;*/
-        border-width: 13px;
+        /*border-width: 13px;*/
         /*border-color: hsl(0deg 0% 7%);*/
         /*background-color: hsl(0deg 0% 18%);*/
         width: 100%;
     }
 
     #wrapper {
-        display: block;
-        /*overflow: scroll;
-        height: 100vh;
+        /*overflow: scroll;*/
+        display: flex;
+        /* height: 100vh; */
+        justify-content: center;
+        margin: auto;
+        
         }
     </style>
 </head>
@@ -69,9 +73,12 @@
         <button class="button" onclick="$('#viewer').attr('src','{{ full_url[1] }}')">Image 1</button>
         <button class="button" onclick="$('#viewer').attr('src','{{ full_url[2] }}')">HD</button>
     </div>
+    <!-- <p>{{ full_url[0] }}</p>
+    <p>{{ full_url[1] }}</p>
+    <p>{{ full_url[2] }}</p> -->
     <div id="wrapper">
         <img id='viewer' src='{{ full_url[0] }}' onclick='fullview()'>
-        <!-- <p>{{ full_url }}</p> -->
+        
     </div>
 </body>
 
