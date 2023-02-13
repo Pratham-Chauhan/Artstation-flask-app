@@ -1,85 +1,110 @@
 <!DOCTYPE html>
 <html>
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <title>Art Viewer</title>
+        <meta name="description" content="" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+        <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css"> -->
+        <script>
+            var count = 0;
+            function fullview() {
+                // console.log('you clicked!');
+            
+                if (count == 0) {
+                    $("#viewer").css({ width: "auto" });
+                    count = 1;
 
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Art Viewer</title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css"> -->
-    <script>
-        var count=0;
-        function fullview() {
-        // console.log('you clicked!');
-        if (count==0) {
-            $("#viewer").css({"width": "auto"});
-            count =1;
-        } else {
-            $("#viewer").css({"width": "100%"});
-            count=0;
+                    // scroll horizontally to middle of the viewer
+					var container = document.getElementById("wrapper");
+					var offset = (container.scrollWidth - container.clientWidth) / 2;
+					console.log(offset);
+                    
+					// container.scrollLeft = offset;
+                    window.scrollTo(offset, window.scrollY);
+					
+                } else {
+                    $("#viewer").css({ width: "100%" });
+                    count = 0;
+                }
+
             }
-        }
         </script>
-    <style type="text/css">
-    .button {
-        /*padding: 20px;*/
-        border-style: none;
-        margin: 10px;
-        font-size: 13px;
-        width: 135px;
-        height: 40px;
-        background-color: gainsboro;
-    }
+        <style type="text/css">
+            .button {
+                /*padding: 20px;*/
+                border-style: none;
+                margin: 10px;
+                font-size: 13px;
+                width: 135px;
+                height: 40px;
+                background-color: gainsboro;
+            }
 
-    .button:focus {
-        background-color: #878787;
-    }
+            .button:focus {
+                background-color: #878787;
+            }
 
-    div.menu {
-        display: flex;
-        justify-content: center;
-    }
+            div.menu {
+                display: flex;
+                justify-content: center;
+            }
 
-    img {
-        /*scale: 50%;*/
-        transform-origin: top left;
-        border: groove;
-        /*margin: 12px;*/
-        /*padding: 11px;*/
-        /*border-radius: 7px;*/
-        /*border-style: solid;*/
-        /*border-width: 13px;*/
-        /*border-color: hsl(0deg 0% 7%);*/
-        /*background-color: hsl(0deg 0% 18%);*/
-        width: 100%;
-    }
+            img {
+                /*scale: 50%;*/
+                transform-origin: top left;
+                border: groove;
+                /*margin: 12px;*/
+                /*padding: 11px;*/
+                /*border-radius: 7px;*/
+                /*border-style: solid;*/
+                /*border-width: 13px;*/
+                /*border-color: hsl(0deg 0% 7%);*/
+                /*background-color: hsl(0deg 0% 18%);*/
+                width: 100%;
+                margin: auto;
+            }
 
-    #wrapper {
-        /*overflow: scroll;*/
-        display: flex;
-        /* height: 100vh; */
-        justify-content: center;
-        margin: auto;
-        
-        }
-    </style>
-</head>
+            #wrapper {
+                display: flex;
+                /* height: 100vh; */
+/*                 justify-content: center; */
 
-<body>
-    <div class='menu'>
-        <button class="button active" onclick="$('#viewer').attr('src','{{ full_url[0] }}')">Cover Img</button>
-        <button class="button" onclick="$('#viewer').attr('src','{{ full_url[1] }}')">Image 1</button>
-        <button class="button" onclick="$('#viewer').attr('src','{{ full_url[2] }}')">HD</button>
-    </div>
-    <!-- <p>{{ full_url[0] }}</p>
+/*				white-space: nowrap;*/
+/*				overflow:scroll;*/
+            }
+        </style>
+ 
+    </head>
+
+    <body>
+        <div class="menu">
+            <button
+                class="button active"
+                onclick="$('#viewer').attr('src','{{ full_url[0] }}')"
+            >
+                Cover Img
+            </button>
+            <button
+                class="button"
+                onclick="$('#viewer').attr('src','{{ full_url[1] }}')"
+            >
+                Image 1
+            </button>
+            <button
+                class="button"
+                onclick="$('#viewer').attr('src','{{ full_url[2] }}')"
+            >
+                HD
+            </button>
+        </div>
+        <!-- <p>{{ full_url[0] }}</p>
     <p>{{ full_url[1] }}</p>
     <p>{{ full_url[2] }}</p> -->
-    <div id="wrapper">
-        <img id='viewer' src='{{ full_url[0] }}' onclick='fullview()'>
-        
-    </div>
-</body>
-
+        <div id="wrapper">
+            <img id="viewer" src="{{ full_url[0] }}" onclick="fullview()" />
+        </div>
+    </body>
 </html>

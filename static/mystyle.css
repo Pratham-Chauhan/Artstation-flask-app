@@ -2,9 +2,6 @@
   display: flex;
   justify-content: center;
 }
-/* .art {
-  display: none;
-} */
 
 .container {
   display: inline-grid;

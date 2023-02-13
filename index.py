@@ -35,6 +35,9 @@ def Trending_Art_Extract(page_no):
 
     random.shuffle(tdata)
     for artwork in tdata:
+        if not artwork['hide_as_adult']:
+            pass
+    
         art_urls.append({'URL': artwork['smaller_square_cover_url'],
                          'hash': artwork['hash_id'],
                          'title': artwork['title'],
@@ -49,7 +52,7 @@ def Trending_Art_Extract(page_no):
         # cover_url = cover_url.split('/')
         # del cover_url[ cover_url.index('smaller_square') - 1 ]
         # cover_url = '/'.join(cover_url).replace("smaller_square", img_size)
-
+    print(len(art_urls))
 
 def download_art(art_hash):
     art_url = f"https://www.artstation.com/projects/{art_hash}.json"
