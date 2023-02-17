@@ -56,14 +56,14 @@ def Trending_Art_Extract(page_no):
 
 def download_art(art_hash):
     art_url = f"https://www.artstation.com/projects/{art_hash}.json"
-    x2 = r.get(art_url)
+    x2 = r.get(art_url).json()
 
-    cover_art = x2.json()['cover_url']
-    image_url = x2.json()['assets'][0].get('image_url')
+    cover_art = x2['cover_url']
+    image_url = x2['assets'][0].get('image_url')
 
     if cover_art == image_url:
         return [cover_art]
-    return [cover_art, image_url, image_url.replace('large', '4k')]
+    return [cover_art, image_url, image_url.replace('large', '4k'), x2['title']]
 
 
 app = Flask(__name__)
@@ -85,7 +85,7 @@ def go_to_page():
 
 @app.route('/view/<art_hash>')
 def view_art(art_hash):
-    return render_template("image_viewer.html", full_url=download_art(art_hash))
+    return render_template("image_viewer.html", full_url=download_art(art_hash), hash=art_hash)
 
 
 # @app.route('/load')
