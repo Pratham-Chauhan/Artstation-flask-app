@@ -3,11 +3,23 @@ from flask import Flask, render_template, render_template_string, redirect, make
 import requests as r
 # from random import randint
 import random
+from concurrent.futures import ThreadPoolExecutor
+from threading import Thread
 
 tdata = []
 refresh = 1
 img_size = 'medium'
 art_urls = []
+
+cache_urls = dict()
+
+def cache_artURL():
+    all_hsh = [j['hash'] for j in art_urls[:]]
+    remaing_hsh = list(set(all_hsh) - set(cache_urls.keys()))
+    print("Remaining:", len(remaing_hsh))
+
+    with ThreadPoolExecutor() as executor:
+        executor.map(download_art, remaing_hsh)
 
 
 def Trending_Art_Extract(page_no):
@@ -46,28 +58,31 @@ def Trending_Art_Extract(page_no):
                          'artist_url': artwork['user']['username'],
                          'artist_img': artwork['user']['medium_avatar_url']})
 
-        # print(artwork['user']['username'],'-', artwork['title'],'\n')
-        # print('Hash:',art_hash)
-
         # cover_url = cover_url.split('/')
         # del cover_url[ cover_url.index('smaller_square') - 1 ]
         # cover_url = '/'.join(cover_url).replace("smaller_square", img_size)
     print(len(art_urls))
 
+    Thread(target=cache_artURL).start()
+
+
 def download_art(art_hash):
+    print('making requests:', art_hash)
     art_url = f"https://www.artstation.com/projects/{art_hash}.json"
     x2 = r.get(art_url).json()
 
     cover_art = x2['cover_url']
     image_url = x2['assets'][0].get('image_url')
 
-    if cover_art == image_url:
-        return [cover_art]
-    return [cover_art, image_url, image_url.replace('large', '4k'), x2['title']]
+    # if cover_art == image_url:
+    #     return [cover_art]
+
+    rdata = [cover_art, image_url, image_url.replace('large', '4k'), x2['title']]
+    cache_urls[art_hash] = rdata
+    return rdata
 
 
 app = Flask(__name__)
-
 
 @app.route('/<int:n>')
 def index(n):
@@ -77,7 +92,7 @@ def index(n):
 
 @app.route('/')
 def go_to_page():
-    n = random.randint(1, 50)
+    n = random.randint(1, 100)
     print(n)
 
     return redirect(f'/{n}')
@@ -85,7 +100,12 @@ def go_to_page():
 
 @app.route('/view/<art_hash>')
 def view_art(art_hash):
-    return render_template("image_viewer.html", full_url=download_art(art_hash), hash=art_hash)
+    cu = cache_urls.get(art_hash)
+    if cu:
+        print('\nFound Cached URLs')
+        return render_template("image_viewer.html", full_url=cu, hash=art_hash)
+    else:
+        return render_template("image_viewer.html", full_url=download_art(art_hash), hash=art_hash)
 
 
 # @app.route('/load')
