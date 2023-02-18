@@ -13,7 +13,7 @@
         var count = 0;
         function fullview() {
             // console.log('you clicked!');
-          
+
 
             if (count == 0) {
                 $("#viewer").css({ width: "auto" });
@@ -29,15 +29,15 @@
                 window.scrollTo(offset, window.scrollY);
 
                 // hide the above panel 
-                $('.menu').css({display:"none"})
-                $('.menu2').css({display:"none"})
+                $('.menu').css({ display: "none" })
+                $('.menu2').css({ display: "none" })
             } else {
                 $("#viewer").css({ width: "100%" });
                 count = 0;
 
                 // show above panel
-                $('.menu').css({display:"flex"})
-                $('.menu2').css({display:"flex"})
+                $('.menu').css({ display: "flex" })
+                $('.menu2').css({ display: "flex" })
             }
         }
     </script>
