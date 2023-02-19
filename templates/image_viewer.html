@@ -97,6 +97,12 @@
             margin-right: 2.5rem;
 
         }
+        #loading {
+            display: none;
+            font-size: 1.7em;
+            font-family: monospace;
+            margin: auto;
+        }
     </style>
 </head>
 
@@ -124,6 +130,7 @@
     </div>
 
     <div id="wrapper">
+        <div id='loading'>Loading...</div>
         <img id="viewer" src="{{ full_url[0] }}" onclick="fullview()" />
     </div>
 
@@ -137,7 +144,11 @@
             $("#viewer").css({ display: "none" });
             $("#viewer").attr("src", img);
 
+            // show loading text
+            $("#loading").css({ display: "block" });
+
             $("#viewer")[0].onload = function () {
+                $("#loading").css({ display: "none" });
                 $("#viewer").css({ display: "block" });
                 update_size();
             };
