@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=815, initial-scale=0.44" />
     <title>ArtStation Gallery</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='mystyle.css')}}" />
-    <!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script> -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 
 </head>
 
@@ -42,9 +42,14 @@
         <div class="container">
             {% for art in urls %}
             <div class="art {{ art.hash }}" style="display: none">
-                <a href="/view/{{ art.hash }}" target="_blank">
-                    <img src="{{ art.URL }}" />
-                </a>
+                <div style="position: relative;">
+                    <a href="/view/{{ art.hash }}" target="_blank" class="art">
+                        <img  src="{{ art.URL }}" />
+                    </a>
+                    <!-- <div class="like"> -->
+                    <img class="like icon" src="/static/like_bt.png">
+                    <!-- </div> -->
+                </div>
 
                 <div class="artist">
                     <img src="{{ art.artist_img }}" />
@@ -57,7 +62,15 @@
     </div>
     <div class="loadmore" onclick="loads()">Load More</div>
 
-
+    <script>
+        // change color of like button to pink (enable)
+        $(".like").on("click", function() {
+            $(this).css({
+                'filter': "invert(50%) sepia(100%) saturate(5000%) hue-rotate(5.7rad)",
+                'opacity': '100%'
+            })
+        });
+    </script>
     <script>
         var e = document.getElementById('devicesize');
         var art = document.getElementsByTagName('img');
