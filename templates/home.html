@@ -43,12 +43,11 @@
             {% for art in urls %}
             <div class="art {{ art.hash }}" style="display: none">
                 <div style="position: relative;">
-                    <a href="/view/{{ art.hash }}" target="_blank" class="art">
+                    <a href="/view/{{ art.hash }}" target="_blank" class="view">
                         <img  src="{{ art.URL }}" />
                     </a>
-                    <!-- <div class="like"> -->
                     <img class="like icon" src="/static/like_bt.png">
-                    <!-- </div> -->
+                    
                 </div>
 
                 <div class="artist">
