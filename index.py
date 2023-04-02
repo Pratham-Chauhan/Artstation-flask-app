@@ -48,7 +48,8 @@ def Trending_Art_Extract(page_no):
     random.shuffle(tdata)
     for artwork in tdata:
         if artwork['hide_as_adult']:
-            pass
+            print("IT'S ADULT CONTENT: ", artwork['hash_id'])
+            continue
     
         art_urls.append({'URL': artwork['smaller_square_cover_url'],
                          'hash': artwork['hash_id'],
