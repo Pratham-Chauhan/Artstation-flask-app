@@ -14,9 +14,9 @@
     gap: 0.3em;
 }
 
-.view:hover {
+/*.view:hover {
     opacity: 85%;
-}
+}*/
 
 .view:hover + img {
     display: block;
@@ -36,6 +36,12 @@
     /* filter: invert(50%) sepia(100%) saturate(5000%) hue-rotate(5.7rad); */
 }
 
+.blur_bg {
+    filter: blur(9px) brightness(1.2);
+    position: relative;
+    width: 120%;
+}
+
 /* .like:focus{
   filter: invert(50%) sepia(100%) saturate(5000%) hue-rotate(5.7rad);
 } */
@@ -43,6 +49,8 @@
 div.artist {
     display: flex;
     gap: 1em;
+
+    position: sticky;
     /*  background-color: red;*/
     height: 3em;
     align-items: center;

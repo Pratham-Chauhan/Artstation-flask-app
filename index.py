@@ -1,4 +1,3 @@
-from distutils.archive_util import make_archive
 from flask import Flask, render_template, render_template_string, redirect, make_response, jsonify
 import requests as r
 # from random import randint
@@ -73,12 +72,16 @@ def download_art(art_hash):
     x2 = r.get(art_url).json()
 
     cover_art = x2['cover_url']
-    image_url = x2['assets'][0].get('image_url')
 
+    image_urls = []
+
+    for img in x2['assets']:
+        print(img.get('image_url'))
+        if img['has_image'] == True: image_urls.append(img.get('image_url'))
     # if cover_art == image_url:
     #     return [cover_art]
 
-    rdata = [cover_art, image_url, image_url.replace('large', '4k'), x2['title']]
+    rdata = [cover_art, *image_urls,  x2['title']] # image_url.replace('large', '4k')
     cache_urls[art_hash] = rdata
     return rdata
 
@@ -115,4 +118,4 @@ def view_art(art_hash):
 
 
 if __name__ == "__main__":
-    app.run(host="192.168.43.55", debug=True)
+    app.run(debug=True)

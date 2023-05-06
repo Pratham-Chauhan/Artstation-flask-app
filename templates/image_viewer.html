@@ -108,15 +108,9 @@
 
 <body>
     <div class="menu">
-        <button class="button active" onclick="update_image('{{ full_url[0] }}')">
-            Cover Img
-        </button>
-        <button class="button" onclick="update_image('{{ full_url[1] }}')">
-            Image 1
-        </button>
-        <button class="button" onclick="update_image('{{ full_url[2] }}')">
-            HD
-        </button>
+        {% for i in range(full_url|length - 1) %}
+            <button class="button active" onclick="update_image('{{ full_url[i] }}')">  {{i+1}} </button>
+        {% endfor %}
     </div>
     <div class="menu2">
         <h4 id="size_info"></h4>
