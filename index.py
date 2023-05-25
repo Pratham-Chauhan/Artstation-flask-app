@@ -5,6 +5,24 @@ import random
 from concurrent.futures import ThreadPoolExecutor
 from threading import Thread
 
+# chrome webdriver method
+import undetected_chromedriver as uc
+from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.chrome.options import Options
+from bs4 import BeautifulSoup
+import json 
+
+# initiate Web Driver
+print('Initating Driver')
+DRIVER = ChromeDriverManager().install()
+
+options = Options()
+options.headless = True
+
+driver = uc.Chrome(executable_path=DRIVER, options=options)
+print('Driver Ready\n')
+
+
 tdata = []
 refresh = 1
 img_size = 'medium'
@@ -16,7 +34,8 @@ def cache_artURL():
     all_hsh = [j['hash'] for j in art_urls[:]]
     remaing_hsh = list(set(all_hsh) - set(cache_urls.keys()))
     print("Remaining:", len(remaing_hsh))
-
+    print('Making Requests:\n ')
+    
     with ThreadPoolExecutor() as executor:
         executor.map(download_art, remaing_hsh)
 
@@ -63,13 +82,28 @@ def Trending_Art_Extract(page_no):
         # cover_url = '/'.join(cover_url).replace("smaller_square", img_size)
     print(len(art_urls))
 
-    Thread(target=cache_artURL).start()
+    # Artstation site updated their security, so cannot use requests, it blocks the script completely.
+    # Thread(target=cache_artURL).start()
 
 
 def download_art(art_hash):
-    print('making requests:', art_hash)
+    print('>', art_hash)
     art_url = f"https://www.artstation.com/projects/{art_hash}.json"
-    x2 = r.get(art_url).json()
+    '''
+    try:
+        response = r.get(art_url)
+        x2 = response.json()
+    except Exception as e:
+        print('status code:', response.status_code,'\nurl:', art_url,'\nerror:', e, '\n request failed!')
+    ''' 
+    # have to use chrome webdriver to prevent cloudflare protection
+    print('using webdriver instead...')
+    driver.get(art_url)
+
+    soup = BeautifulSoup(driver.page_source, features='lxml')
+    x2 = json.loads(soup.text)
+
+
 
     cover_art = x2['cover_url']
 
