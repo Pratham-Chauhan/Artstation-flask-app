@@ -63,7 +63,7 @@ def Trending_Art_Extract(page_no):
         # cover_url = '/'.join(cover_url).replace("smaller_square", img_size)
     print(len(art_urls))
 
-    Thread(target=cache_artURL).start()
+    # Thread(target=cache_artURL).start()
 
 
 def download_art(art_hash):
@@ -74,7 +74,9 @@ def download_art(art_hash):
     }
     print('making requests:', art_hash)
     art_url = f"https://www.artstation.com/projects/{art_hash}.json"
-    x2 = r.get(art_url, headers=headers).json()
+    x2 = r.get(art_url, headers=headers)
+    print(x2)
+    x2 = x2.json()
 
     cover_art = x2['cover_url']
     image_url = x2['assets'][0].get('image_url')
