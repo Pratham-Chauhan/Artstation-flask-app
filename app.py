@@ -76,6 +76,10 @@ def download_art(art_hash):
     art_url = f"https://www.artstation.com/projects/{art_hash}.json"
     x2 = r.get(art_url, headers=headers)
     print(x2, art_url)
+    if x2.status_code != 200:
+        print('Failed to make request.')
+        return ['', '', '', '']
+    
     x2 = x2.json()
 
     cover_art = x2['cover_url']
