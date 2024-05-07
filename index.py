@@ -1,4 +1,3 @@
-from distutils.archive_util import make_archive
 from flask import Flask, render_template, render_template_string, redirect, make_response, jsonify
 import requests as r
 # from random import randint
@@ -68,9 +67,14 @@ def Trending_Art_Extract(page_no):
 
 
 def download_art(art_hash):
+    headers = {
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/113.0",
+        "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8",
+        "Accept-Language": "en-US,en;q=0.5",
+    }
     print('making requests:', art_hash)
     art_url = f"https://www.artstation.com/projects/{art_hash}.json"
-    x2 = r.get(art_url).json()
+    x2 = r.get(art_url, headers=headers).json()
 
     cover_art = x2['cover_url']
     image_url = x2['assets'][0].get('image_url')
@@ -115,4 +119,5 @@ def view_art(art_hash):
 
 
 if __name__ == "__main__":
-    app.run(host="192.168.43.55", debug=True)
+    # app.run(host="192.168.43.55", debug=True)
+    app.run(debug=True)
