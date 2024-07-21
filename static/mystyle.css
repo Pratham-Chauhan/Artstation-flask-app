@@ -3,7 +3,6 @@
     justify-content: center;
 }
 
-
 .main {
     display: flex;
     height: 67px;
@@ -15,9 +14,9 @@
     gap: 0.3em;
 }
 
-.view:hover {
+/*.view:hover {
     opacity: 85%;
-}
+}*/
 
 .view:hover + img {
     display: block;
@@ -37,6 +36,32 @@
     /* filter: invert(50%) sepia(100%) saturate(5000%) hue-rotate(5.7rad); */
 }
 
+
+.blur_bg {
+    width: 120%;
+    height: auto; /* Ensure the height scales proportionally */
+    filter: blur(9px) brightness(1.2) contrast(1.1);
+    margin: 0 -10%; /* Center the image with the extra width */
+    transition: filter 0.3s ease; /* Smooth transition for the filter effect */
+}
+
+.dark_overlay {
+    width: 120%;
+    height: auto; /* Ensure the height scales proportionally */
+    filter: brightness(0);
+    opacity: 27%;
+
+    margin: 0 -10%; /* Center the image with the extra width */
+    transition: filter 0.3s ease; /* Smooth transition for the filter effect */
+}
+
+/* 
+.blur_bg:hover {
+    filter: blur(6px) brightness(1.1); 
+} */
+
+
+
 /* .like:focus{
   filter: invert(50%) sepia(100%) saturate(5000%) hue-rotate(5.7rad);
 } */
@@ -44,10 +69,14 @@
 div.artist {
     display: flex;
     gap: 1em;
+
+    position: sticky;
     /*  background-color: red;*/
     height: 3em;
     align-items: center;
     /*  justify-content: space-between;*/
+
+    width: 25em;
 }
 
 .artist img {
@@ -55,6 +84,28 @@ div.artist {
     height: 100%;
 }
 
+/* without blur background */
+/* .artist a{
+    color: #242424;
+    text-shadow: #868686 0px 0px 2px;
+} */
+
+/* with blur background */
+.artist a {
+    color: #fff; 
+    text-decoration: underline;
+    text-shadow: #000 0px 0px 5.5px;
+    font-size: 1.3em;
+
+    /* overflow: visible; */
+    text-overflow: ellipsis;
+    white-space: break-spaces;
+
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+
+}
 @media screen and (max-width: 900px) {
     .container {
         grid-template-columns: repeat(2, 1fr);
@@ -123,3 +174,5 @@ div.artist {
     /* -webkit-user-select: none; */
     /* touch-action: manipulation; */
 }
+
+
