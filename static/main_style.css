@@ -119,6 +119,10 @@ div.artist {
     .like {
         display: block;
     }
+
+    body {
+        background-size: 100% 120em;
+    }
 }
 
 /* 

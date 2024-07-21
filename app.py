@@ -125,5 +125,5 @@ def view_art(art_hash):
 
 
 if __name__ == "__main__":
-    # app.run(host="192.168.43.55", debug=True)
-    app.run(debug=True)
+    app.run(host="192.168.129.34", debug=True)
+    # app.run(debug=True)
