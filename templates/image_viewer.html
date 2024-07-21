@@ -13,31 +13,35 @@
         var count = 0;
         function fullview() {
             // console.log('you clicked!');
-
-
-            if (count == 0) {
-                $("#viewer").css({ width: "auto" });
+            
+            // show or hide the viewer
+            if (count == 0) { // full view
+                $("#viewer").css({ width: "auto", border: "none" });
+                
                 count = 1;
 
                 // scroll horizontally to middle of the viewer
                 var container = document.getElementById("wrapper");
-                var offset =
-                    (container.scrollWidth - container.clientWidth) / 2;
+                var offset = (container.scrollWidth - container.clientWidth) / 2;
                 // console.log(offset);
 
                 // container.scrollLeft = offset;
                 window.scrollTo(offset, window.scrollY);
 
-                // hide the above panel 
-                $('.menu').css({ display: "none" })
-                $('.menu2').css({ display: "none" })
-            } else {
-                $("#viewer").css({ width: "100%" });
+                // hide the above panel
+                $(".menu").css({ display: "none" });
+                $(".menu2").css({ display: "none" });
+
+                document.body.style.backgroundColor = '#242424'; // dark
+            } else { // normal
+                $("#viewer").css({ width: "100%", border: "3px groove #ccc" });
                 count = 0;
 
                 // show above panel
-                $('.menu').css({ display: "flex" })
-                $('.menu2').css({ display: "flex" })
+                document.body.style.backgroundColor = 'hsl(0 0% 93% / 1)'; // light
+                $(".menu").css({ display: "flex" });
+                $(".menu2").css({ display: "flex" });
+
             }
         }
     </script>
@@ -71,7 +75,7 @@
         #viewer {
             /*scale: 50%;*/
             transform-origin: top left;
-            border: groove;
+            border: 3px groove #ccc;  /* Groove border with a light grey color */
             /*margin: 12px;*/
             /*padding: 11px;*/
             /*border-radius: 7px;*/
@@ -79,9 +83,15 @@
             /*border-width: 13px;*/
             /*border-color: hsl(0deg 0% 7%);*/
             /*background-color: hsl(0deg 0% 18%);*/
+
+            box-shadow: 3px 4px 10px rgba(0, 0, 0, 0.3); /* Subtle shadow for depth */
+
             width: 100%;
             margin: auto;
+
+            cursor: pointer;
         }
+
 
         #wrapper {
             display: flex;
@@ -95,8 +105,48 @@
         .icon {
             width: 40px;
             margin-right: 2.5rem;
-
         }
+
+        /* a.link {
+            filter: invert(100%); 
+        } */
+
+        #size_info {
+            color: hsl(0 0% 27% / 1);
+            font-size: 1.2em;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: hsl(0 0% 93% / 1); /* #f0f0f0;  Light grey background */
+            margin: 8px;
+            transition: background-color 0.7s ease; 
+            
+        }
+
+        #title {
+            text-align: center;
+            
+            margin-top: 10px;
+            margin-bottom: 0px;
+            /* margin-top: 29px;
+            margin-bottom: 14px; */
+        }
+
+        #title a {
+            color: #2c3e50; /* Dark blue-grey */
+            text-decoration: none;
+            font-size: 36px;
+            font-weight: bold;
+            transition: color 0.3s ease, text-shadow 0.3s ease;
+        }
+
+        #title a:hover {
+            color: #3498db; /* Bright blue */
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+        }
+
+
         #loading {
             display: none;
             font-size: 1.7em;
@@ -125,15 +175,14 @@
                 {{ full_url[-1] }}
             </a>
         </h2>
-        <a class='link' href="{{ full_url[0] }}" target="_blank">
+        <a class="link" href="{{ full_url[0] }}" target="_blank">
             <img class="svg icon" src="{{ url_for('static', filename='download_icon.svg')}}" /></a>
     </div>
 
     <div id="wrapper">
-        <div id='loading'>Loading...</div>
+        <div id="loading">Loading...</div>
         <img id="viewer" src="{{ full_url[0] }}" onclick="fullview()" />
     </div>
-
 
     <script>
         // update image view
