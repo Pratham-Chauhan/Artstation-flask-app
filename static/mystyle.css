@@ -36,6 +36,11 @@
     /* filter: invert(50%) sepia(100%) saturate(5000%) hue-rotate(5.7rad); */
 }
 
+body{
+    background: linear-gradient(to bottom, black, #21295c);
+    background-attachment: fixed;
+    background-size: 100% 96em;
+}
 
 .blur_bg {
     width: 120%;
@@ -173,6 +178,20 @@ div.artist {
     /* user-select: none; */
     /* -webkit-user-select: none; */
     /* touch-action: manipulation; */
+
+    animation: jump 0.5s infinite;
+  }
+  
+  @keyframes jump {
+    0% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+    100% {
+      transform: translateY(0);
+    }
 }
 
 
