@@ -21,7 +21,7 @@ def cache_artURL():
         executor.map(download_art, remaing_hsh)
 
 
-def Trending_Art_Extract(page_no):
+def Trending_Art_Extract(page_no: int):
     global refresh, art_urls, tdata
     art_urls = []
 
@@ -66,7 +66,7 @@ def Trending_Art_Extract(page_no):
     Thread(target=cache_artURL).start()
 
 
-def download_art(art_hash):
+def download_art(art_hash: str) -> list[str]:
     headers = {
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/113.0",
         "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8",
@@ -85,6 +85,7 @@ def download_art(art_hash):
     cover_art = x2['cover_url']
     image_url = x2['assets'][0].get('image_url')
 
+    
     # if cover_art == image_url:
     #     return [cover_art]
 

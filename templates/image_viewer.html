@@ -10,18 +10,27 @@
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
     <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css"> -->
     <link rel="stylesheet" href="{{ url_for('static', filename='viewer.css')}}" />
-    
+
     <script>
+        const imageUrls = {{ full_url | tojson }};
+        console.log(imageUrls);
+
         var count = 0;
-        function fullview() {
+
+        function fullview(event) {
+            var mouseX = event.clientX;
+            var mouseY = event.clientY;
+
+            console.log(mouseX, mouseY);
+
             // console.log('you clicked!');
-            
+
             // show or hide the viewer
             if (count == 0) { // full view
-                $("#viewer").css({ width: "auto", border: "none" });
-                
+
                 count = 1;
 
+                $("#viewer").css({ width: "auto", border: "none" });
                 // scroll horizontally to middle of the viewer
                 var container = document.getElementById("wrapper");
                 var offset = (container.scrollWidth - container.clientWidth) / 2;
@@ -35,9 +44,59 @@
                 $(".menu2").css({ display: "none" });
 
                 document.body.style.backgroundColor = '#242424'; // dark
+
+                
+                
+                if (device_type == 'desktop') {
+                    // show the image relocation animation
+                    const element = document.getElementById("viewer");
+
+                    initial_pos = calculate_image_position(mouseX, mouseY);
+                    init_x = initial_pos[0];
+                    init_y = initial_pos[1];
+
+                    element.animate(
+                        [
+                            { left: 0 + 'px', top: 0 + 'px' }, // starting position
+                            { left: init_x + 'px', top: init_y + 'px' }, // ending position
+                        ],
+                        {
+                            duration: 400, // 0.7 seconds
+                            easing: "ease-out",
+                            fill: "backwards",
+                        }
+                    );
+
+                    // jquery version
+                    // $("#viewer").animate(
+                    // {
+                    //     left: -500 +'px' ,
+                    //     top: -500 + 'px'
+                    // }, // ending position
+                    // {
+                    //     duration: 700, // 0.7 seconds
+                    //     // easing: "ease-out",
+                    // }
+                    // );
+
+
+                    $("#viewer").css({ left: init_x + 'px', top: init_y + 'px' });
+                }
+
+                $('body').css({ overflow: 'hidden' });
+
+
             } else { // normal
-                $("#viewer").css({ width: "100%", border: "3px groove #ccc" });
                 count = 0;
+
+                $("#viewer").css({
+                    width: "100%",
+                    border: "3px groove #ccc",
+                    left: 0 + "px",
+                    top: 0 + "px",
+                });
+
+
 
                 // show above panel
                 document.body.style.backgroundColor = 'hsl(0 0% 93% / 1)'; // light
@@ -48,7 +107,58 @@
         }
     </script>
 
+    <script>
+        // const floatImg = document.getElementById("viewer");
+        var loc;
+        function calculate_image_position(mouseX, mouseY) {
+            const imgW = $("#viewer")[0].naturalWidth; // Get the image width
+            const imgH = $("#viewer")[0].naturalHeight; // Get the image height
+            const centerX = window.innerWidth / 2; // Center X coordinate
+            const centerY = window.innerHeight / 2; // Center Y coordinate
 
+            const ratex = 0.8;
+            const ratey = 1.5;
+            const xx = centerX - imgW / 2 + ratex * (centerX - mouseX); // Calculate X position
+            const yy = centerY - imgH / 2 + ratey * (centerY - mouseY); // Calculate Y position
+
+            return [xx, yy];
+        }
+        // Function to check media query
+        function checkMediaQuery() {
+            const mediaQuery = window.matchMedia("(max-width: 900px)");
+
+            // Initial check
+            if (mediaQuery.matches) {
+                console.log("Oh no!  It's a mobile device");
+                // alert("Oh no! It's a mobile device");
+                return "mobile";
+            } else {
+                console.log("Yippee! It's a desktop device");
+                return "desktop";
+            }
+        }
+        var device_type = checkMediaQuery();
+        if (device_type == "desktop") {
+            document.addEventListener("mousemove", (e) => {
+                const mouseX = e.clientX;
+                const mouseY = e.clientY;
+
+                if (count == 1) {
+                    // in fullscreen view
+                    // console.log("in floating mode.");
+                    // console.log(x, y);
+
+                    loc = calculate_image_position(mouseX, mouseY);
+                    // console.log(loc[0], loc[1]);
+
+                    $("#viewer").css({
+                        left: loc[0] + "px",
+                        top: loc[1] + "px",
+                    });
+                }
+            });
+        }
+    </script>
 </head>
 
 <body>
@@ -70,26 +180,29 @@
                 {{ full_url[-1] }}
             </a>
         </h2>
+
+        <!-- download button -->
         <a class="link" href="{{ full_url[0] }}" target="_blank">
             <img class="svg icon" src="{{ url_for('static', filename='download_icon.svg')}}" /></a>
     </div>
 
     <div id="wrapper">
         <div id="loading">Loading...</div>
-        <img id="viewer" src="{{ full_url[0] }}" onclick="fullview()" />
+        <img id="viewer" src="{{ full_url[0] }}" onclick="fullview(event)" />
     </div>
 
     <script>
         // update image view
         function update_image(img) {
             console.log(img);
-            $("a.link").attr("href", img);
-            // wait for loading the new image
-            $("#viewer").css({ display: "none" });
-            $("#viewer").attr("src", img);
+            $("a.link").attr("href", img); // update download link
 
-            // show loading text
-            $("#loading").css({ display: "block" });
+            $("#viewer").css({ display: "none" }); // hide the old image
+
+            $("#viewer").attr("src", img); // set the new image link
+
+            // wait for loading the new image
+            $("#loading").css({ display: "block" }); // show loading text
 
             $("#viewer")[0].onload = function () {
                 $("#loading").css({ display: "none" });

@@ -25,6 +25,7 @@ div.menu2 {
 
 #viewer {
     /*scale: 50%;*/
+    position: relative;
     transform-origin: top left;
     border: 3px groove #ccc;  /* Groove border with a light grey color */
     /*margin: 12px;*/
@@ -72,7 +73,6 @@ body {
     background-color: hsl(0 0% 93% / 1); /* #f0f0f0;  Light grey background */
     margin: 8px;
     transition: background-color 0.7s ease; 
-    
 }
 
 #title {

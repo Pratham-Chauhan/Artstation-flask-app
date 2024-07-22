@@ -65,7 +65,13 @@
             {% endfor %}
         </div>
     </div>
-    <div class="loadmore" onclick="loads()">Load More</div>
+
+    <div class="loadmore">
+        <div class="glow"></div>
+        <div class="loadmore-text" onclick="loads()">Load More</div>
+      </div>
+
+    <!-- <div class="loadmore" onclick="loads()">Load More</div> -->
 
     <script>
         // change color of like button to pink (enable)
@@ -76,6 +82,7 @@
             });
         });
 
+        
         // $(window).on('scroll', function() {
         //     var scrollPosition = $(window).scrollTop(); // Get the vertical scroll position
         //     $('body').css('background-position-y', scrollPosition + 'px'); // Update the background-position-y
