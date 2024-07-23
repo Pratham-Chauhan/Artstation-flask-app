@@ -84,15 +84,15 @@ function fullview(event) {
             // show the image relocation animation
             const element = document.getElementById("viewer");
             initial_pos = calculate_image_position(mouseX, mouseY);
-            // initial_pos = move_image_to_center();
+            middle_pos = move_image_to_center();
             init_x = initial_pos[0];
             init_y = initial_pos[1];
 
             element.animate(
                 [
                     {
-                        left: $("#viewer")[0].offsetLeft + "px",
-                        top: $("#viewer")[0].offsetTop + "px",
+                        left: middle_pos[0] + "px",
+                        top: middle_pos[1] + "px",
                     }, // starting position
                     { left: init_x + "px", top: init_y + "px" }, // ending position
                 ],
