@@ -39,7 +39,7 @@ div.menu2 {
     box-shadow: 3px 4px 10px rgba(0, 0, 0, 0.3); /* Subtle shadow for depth */
 
     width: 100%;
-    margin: auto;
+    /* margin: auto; */
 
     cursor: pointer;
 }
@@ -69,6 +69,7 @@ div.menu2 {
 }
 
 body {
+    overflow: 'auto';
     font-family: Arial, sans-serif;
     background-color: hsl(0 0% 93% / 1); /* #f0f0f0;  Light grey background */
     margin: 8px;
