@@ -44,14 +44,16 @@ function move_image_to_center() {
     // return [0,0]
 }
 
-// scroll horizontally to middle of the viewer
-function scroll_in_the_middle() {
-    var container = document.getElementById("wrapper");
-    var offset = (container.scrollWidth - container.clientWidth) / 2;
-    // console.log('scrolling in the middle', offset);
-    // Scroll to the middle point
-    window.scrollTo(offset, 0);  
+// scroll horizontally to middle of the viewer    
+function scrollToMiddle(element) {
+    const scrollLeft = (element.scrollWidth - element.clientWidth) / 2;
+
+    element.scrollTo({
+        left: scrollLeft,
+        behavior: 'smooth'
+    });
 }
+
 
 function hide_menu() {
     $("#viewer").css({ width: "auto", border: "none" }); //  reset the image size and remove the border
@@ -124,7 +126,9 @@ function fullview(event) {
             // margin: auto is the cause of all the miscalculations and image position,
             // cause it change the left and top properties of the image and center the image.
             $("#viewer").css({ margin: "auto" });
-            scroll_in_the_middle();
+            
+            var container = document.getElementById("wrapper");
+            scrollToMiddle(container)
             
 
         }

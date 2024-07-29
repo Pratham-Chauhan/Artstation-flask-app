@@ -69,7 +69,7 @@ div.menu2 {
 }
 
 body {
-    overflow: 'auto';
+    overflow: auto;
     font-family: Arial, sans-serif;
     background-color: hsl(0 0% 93% / 1); /* #f0f0f0;  Light grey background */
     margin: 8px;

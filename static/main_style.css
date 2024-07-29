@@ -144,19 +144,50 @@ div.artist {
   padding: 10px 20px;
   background-color: #0c0c0c; /* Dark background color for better contrast */
   /* border-top: 1px solid #ccc; */
-  border-top: 3px solid #2f2f2f;
-  border-image: linear-gradient(to right, #666666, #2f2f2f) 1;
+  /* border-top: 3px solid #2f2f2f; */
+  /* border-image: linear-gradient(to right, #666666, #2f2f2f) 1; */
+  /* border-image: linear-gradient(to right, #ffffff, #000000) 1; */
+
   text-align: center; /* Center align the text */
+
+  /* animation: moveGradient 3s linear infinite; */
+}
+
+.footer::before {
+  content: "";
+  position: absolute;
+  top: -3px; /* Adjust to match the border width */
+  left: 0;
+  width: 100%;
+  height: 3px; /* Match the border width */
+  background: linear-gradient(to right, #6a11cb, #2575fc, #6a11cb);
+  /* background: linear-gradient(to right, #666666, #2f2f2f, #666666); */
+  background-size: 200% 100%;
+  z-index: -1;
+  animation: moveGradient 2s linear infinite;
+  animation-direction: reverse;
+}
+
+@keyframes moveGradient {
+  0% {
+    background-position-x: 0%;
+  }
+  100% {
+    background-position-x: 200%;
+  }
+
 }
 
 .footer #your-name {
   font-weight: bold;
+  /* font-family: 'Open Sans', sans-serif; */
   background: linear-gradient(to right, #6a11cb, #2575fc); /* Gradient color */
   -webkit-background-clip: text; /* For text gradient */
   -webkit-text-fill-color: transparent; /* For text gradient */
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Text shadow */
   animation: subtleGlow 2s infinite alternate;
 }
+
 @keyframes subtleGlow {
   0% {
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2), 0 0 5px rgba(106, 17, 203, 0.5),
