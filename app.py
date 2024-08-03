@@ -4,6 +4,8 @@ import requests as r
 import random
 from concurrent.futures import ThreadPoolExecutor
 from threading import Thread
+import re 
+
 
 tdata = []
 refresh = 1
@@ -66,7 +68,7 @@ def Trending_Art_Extract(page_no: int):
     Thread(target=cache_artURL).start()
 
 
-def download_art(art_hash: str) -> list[str]:
+def download_art(art_hash: str) -> dict:
     headers = {
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/113.0",
         "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8",
@@ -75,23 +77,38 @@ def download_art(art_hash: str) -> list[str]:
     print('making requests:', art_hash)
     art_url = f"https://www.artstation.com/projects/{art_hash}.json"
     x2 = r.get(art_url, headers=headers)
-    print(x2, art_url)
+    print((x2, art_url))
     if x2.status_code != 200:
         print('Failed to make request.')
         return ['', '', '', '']
     
     x2 = x2.json()
 
-    cover_art = x2['cover_url']
+    
     image_url = x2['assets'][0].get('image_url')
 
+    links = {
+        'Title': x2['title'],
+        'Cover Art': x2['cover_url'],
+        'Image Links': [], 
+        'Video Links': []
+        }   
+    
+    for i in x2['assets']:
+        if i['has_embedded_player']:
+            vid_link = re.findall(r"src='([^']*)'", i['player_embedded'])
+            if vid_link:
+                links['Video Links'].append(vid_link)
+
+        else: 
+            links['Image Links'].append(i['image_url'])
     
     # if cover_art == image_url:
     #     return [cover_art]
 
-    rdata = [cover_art, image_url, image_url.replace('large', '4k'), x2['title']]
-    cache_urls[art_hash] = rdata
-    return rdata
+    # rdata = [cover_art, image_url, image_url.replace('/large/', '/4k/'), x2['title']]
+    cache_urls[art_hash] = links
+    return links
 
 
 app = Flask(__name__)
@@ -111,8 +128,8 @@ def go_to_page():
 
 
 @app.route('/view/<art_hash>')
-def view_art(art_hash):
-    cu = cache_urls.get(art_hash)
+def view_art(art_hash: str):
+    cu:dict = cache_urls.get(art_hash)
     if cu:
         print('\nFound Cached URLs')
         return render_template("image_viewer.html", full_url=cu, hash=art_hash)
@@ -120,11 +137,6 @@ def view_art(art_hash):
         return render_template("image_viewer.html", full_url=download_art(art_hash), hash=art_hash)
 
 
-# @app.route('/load')
-# def load_more():
-#     res = make_response(jsonify(tdata[:10]), 200)
-
-
 if __name__ == "__main__":
-    app.run(host="192.168.129.34", debug=True)
+    app.run(debug=True)
     # app.run(debug=True)

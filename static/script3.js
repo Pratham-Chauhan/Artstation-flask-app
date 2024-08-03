@@ -1,13 +1,14 @@
 
 // update image view
-function update_image(img) {
-    // console.log(img);
-    
-    $("a.link").attr("href", img); // update download link
+function updateImg(index) {
+    console.log(index);
+    currentIndex = index;
+
+    $("a.link").attr("href", images[index].src); // update download link
 
     $("#viewer").css({ display: "none" }); // hide the old image
 
-    $("#viewer").attr("src", img); // set the new image link
+    $("#viewer").attr("src", images[index].src); // set the new image link
 
     // wait for loading the new image
     $("#loading").css({ display: "block" }); // show loading text
@@ -15,11 +16,14 @@ function update_image(img) {
     $("#viewer")[0].onload = function () {
         $("#loading").css({ display: "none" });
         $("#viewer").css({ display: "block" });
-        update_size();
+        updateSize();
     };
+
+    $(".indicator").removeClass("active");
+    $(`.indicator[data-index=${index}]`).addClass("active");
 }
 // update image size text
-function update_size() {
+function updateSize() {
     var img = $("#viewer")[0];
     // console.log('Image is loaded!')
     // get image size
@@ -29,16 +33,90 @@ function update_size() {
     i_height = img.naturalHeight;
     i_width = img.naturalWidth;
 
-    ratex = (i_width/window.innerWidth).toFixed(1);
-    ratey = (i_height/window.innerHeight).toFixed(1);
+    ratex = (i_width / window.innerWidth).toFixed(1);
+    ratey = (i_height / window.innerHeight).toFixed(1);
 
     $("#size_info").html(`${i_width} x ${i_height}`);
 }
 
-
 if ($("#viewer")[0].complete) {
-    update_size();
-} 
-else {
-    $("#viewer")[0].onload = update_size;
+    updateSize();
+} else {
+    $("#viewer")[0].onload = updateSize;
 }
+
+// indicator menu
+$.each(imageUrls, function (index) {
+    // const button = $('<button class="button">').text(`${index}`)
+    const indicator = $('<div class="indicator">').attr("data-index", index);
+    indicator.click(() => updateImg(index));
+
+    $(".menu").append(indicator);
+});
+
+var currentIndex = 0;
+updateImg(currentIndex); // show the first image
+
+function goToNextImage() {
+    updateImg((currentIndex + 1) % imageUrls.length);
+}
+function goToPrevImage() {
+    updateImg((currentIndex - 1 + imageUrls.length) % imageUrls.length);
+}
+// Event Listeners -- Interactive
+document.addEventListener("click", (event) => {
+    const width = window.innerWidth;
+    const clickPosition = event.clientX;
+    const threshold = window.innerWidth * 0.1; // 10% of the window width
+
+    console.log("Clicked on", event.target.id, clickPosition, width);
+
+    if (clickPosition < threshold) {// Clicked on the left side
+        goToPrevImage();
+    } else if (clickPosition > window.innerWidth - threshold) {// Clicked on the right side
+        goToNextImage();
+
+    } else {
+        console.log("clicked in between screen.");
+        if (event.target.id == "viewer") {
+            fullview(event);
+        }
+    }
+});
+
+document.addEventListener("keydown", (event) => {
+    if (event.key === "ArrowLeft") {
+        goToPrevImage();
+    } else if (event.key === "ArrowRight") {
+        goToNextImage();
+    }
+});
+
+let hdMode = false;
+document.addEventListener("contextmenu", (event) => {
+    if (event.target.id == "viewer") {
+        event.preventDefault(); // Prevent the default context menu from appearing
+        const img = event.target;
+        const largeSrc = img.src.replace("/4k/", "/large/");
+        const hdSrc = img.src.replace("/large/", "/4k/");
+
+        if (hdMode) {
+            event.target.src = largeSrc;
+        } else {
+            event.target.src = hdSrc;
+        }
+
+        hdMode = !hdMode;
+    }
+});
+
+window.addEventListener('wheel', (event) => {
+    if (fullMode) {
+        if (event.deltaY < 0) { // Scrolling up
+            goToNextImage();
+
+        } else if (event.deltaY > 0) { // Scrolling down
+            goToPrevImage();
+        }
+    }
+});

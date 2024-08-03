@@ -39,35 +39,42 @@
         <input type="checkbox" id="toggle_artist" onclick="toggle()" />Show Artist Name
     </div>
 
+
+
+    
     <div id="wrapper">
-        <div class="container">
-            {% for art in urls %}
+        <div class="spaces"></div>
+                <div class="container">
+                {% for art in urls %}
 
-            <div class="art {{ art.hash }}" style="display: none">
-                <div style="position: absolute; overflow: hidden">
-                    <img class="blur_bg" src="{{ art.URL }}" />
+                <div class="art {{ art.hash }}" style="display: none">
+                    <div style="position: absolute; overflow: hidden">
+                        <img class="blur_bg" src="{{ art.URL }}" />
+                    </div>
+
+                    <div style="position: absolute; overflow: hidden">
+                        <img class="dark_overlay" src="{{ art.URL }}" />
+                    </div>
+
+                    <div style="position: relative">
+                        <a href="/view/{{ art.hash }}" target="_blank" class="view">
+                            <img src="{{ art.URL }}" />
+                        </a>
+                        <img class="like icon" src="/static/like_bt.png" />
+                    </div>
+
+                    <div class="artist">
+                        <img src="{{ art.artist_img }}" />
+                        <a href="https://www.artstation.com/{{ art.artist_url }}" target="_blank">{{ art.artist }}</a>
+                    </div>
                 </div>
 
-                <div style="position: absolute; overflow: hidden">
-                    <img class="dark_overlay" src="{{ art.URL }}" />
-                </div>
-
-                <div style="position: relative">
-                    <a href="/view/{{ art.hash }}" target="_blank" class="view">
-                        <img src="{{ art.URL }}" />
-                    </a>
-                    <img class="like icon" src="/static/like_bt.png" />
-                </div>
-
-                <div class="artist">
-                    <img src="{{ art.artist_img }}" />
-                    <a href="https://www.artstation.com/{{ art.artist_url }}" target="_blank">{{ art.artist }}</a>
-                </div>
+                {% endfor %}
             </div>
-
-            {% endfor %}
+        
+        <div class="spaces"></div>
         </div>
-    </div>
+
 
     <div class="loadmore" onclick="loads()">
         <div class="glow"></div>
@@ -124,7 +131,7 @@
         function loads() {
             // show more art
 
-            var items = document.querySelectorAll(".art ");
+            var items = document.querySelectorAll(".art");
             items = Array.from(items);
 
             // add 8 rows
@@ -133,8 +140,9 @@
             }
             count += 8;
             console.log(count);
+            
+            // hide load more button at the end of page
             if (3 * count >= 100) {
-                // hide load more button
                 var load_bt = document.querySelector(".loadmore");
                 console.log(load_bt);
                 load_bt.style.display = "none";

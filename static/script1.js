@@ -1,5 +1,5 @@
 var imgX, imgY, imgH, imgW;
-var count = 0;
+var fullMode = false;
 
 function mouse_away_from_image_center(mouseX, mouseY) {
     // calculate distance between mouse pointer and image center
@@ -74,9 +74,8 @@ function fullview(event) {
     // var deltaY, deltaX;
 
     // show or hide the viewer
-    if (count == 0) {
-        // full view
-        count = 1;
+    if (!fullMode) {
+        fullMode = !fullMode;
 
         hide_menu();
 
@@ -121,8 +120,7 @@ function fullview(event) {
 
             // disable scrolling, not recommended right now as floating mode is not perfect.
             $('body').css({ overflow: 'hidden' });
-        } else {
-            // mobile
+        } else { // mobile
             // margin: auto is the cause of all the miscalculations and image position,
             // cause it change the left and top properties of the image and center the image.
             $("#viewer").css({ margin: "auto" });
@@ -134,7 +132,7 @@ function fullview(event) {
         }
     } else {
         // normal view
-        count = 0;
+        fullMode = !fullMode;
 
         $("#viewer").css({
             width: "100%",

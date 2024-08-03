@@ -14,6 +14,14 @@
   gap: 0.3em;
 }
 
+.spaces {
+  flex-grow: 1;
+  /* background-color: white; */
+  background: linear-gradient(to bottom, black, #21295c);
+  /* background-attachment: fixed; */
+  /* background-size: 100% 96em; */
+}
+
 /*.view:hover {
     opacity: 85%;
 }*/
@@ -37,9 +45,10 @@
 }
 
 body {
-  background: linear-gradient(to bottom, black, #21295c);
-  background-attachment: fixed;
-  background-size: 100% 96em;
+  background-color: black;
+  /* background: linear-gradient(to bottom, black, #21295c); */
+  /* background-attachment: fixed;
+  background-size: 100% 96em; */
 }
 
 /* body {
@@ -68,11 +77,11 @@ body {
 
 .dark_overlay {
   width: 120%;
-  height: auto; /* Ensure the height scales proportionally */
+  height: auto;/* Ensure the height scales proportionally */
   filter: brightness(0);
   opacity: 27%;
 
-  margin: 0 -10%; /* Center the image with the extra width */
+  margin: 0 -10%;/* Center the image with the extra width */
   transition: filter 0.3s ease; /* Smooth transition for the filter effect */
 }
 
@@ -142,13 +151,15 @@ div.artist {
   font-size: 14px;
   color: #b3b3b3;
   padding: 10px 20px;
-  background-color: #0c0c0c; /* Dark background color for better contrast */
+  background-color: #0c0c0c;
+  /* Dark background color for better contrast */
   /* border-top: 1px solid #ccc; */
   /* border-top: 3px solid #2f2f2f; */
   /* border-image: linear-gradient(to right, #666666, #2f2f2f) 1; */
   /* border-image: linear-gradient(to right, #ffffff, #000000) 1; */
 
-  text-align: center; /* Center align the text */
+  text-align: center;
+  /* Center align the text */
 
   /* animation: moveGradient 3s linear infinite; */
 }
@@ -156,10 +167,12 @@ div.artist {
 .footer::before {
   content: "";
   position: absolute;
-  top: -3px; /* Adjust to match the border width */
+  top: -3px;
+  /* Adjust to match the border width */
   left: 0;
   width: 100%;
-  height: 3px; /* Match the border width */
+  height: 3px;
+  /* Match the border width */
   background: linear-gradient(to right, #6a11cb, #2575fc, #6a11cb);
   /* background: linear-gradient(to right, #666666, #2f2f2f, #666666); */
   background-size: 200% 100%;
@@ -172,19 +185,23 @@ div.artist {
   0% {
     background-position-x: 0%;
   }
+
   100% {
     background-position-x: 200%;
   }
-
 }
 
 .footer #your-name {
   font-weight: bold;
   /* font-family: 'Open Sans', sans-serif; */
-  background: linear-gradient(to right, #6a11cb, #2575fc); /* Gradient color */
-  -webkit-background-clip: text; /* For text gradient */
-  -webkit-text-fill-color: transparent; /* For text gradient */
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Text shadow */
+  background: linear-gradient(to right, #6a11cb, #2575fc);
+  /* Gradient color */
+  -webkit-background-clip: text;
+  /* For text gradient */
+  -webkit-text-fill-color: transparent;
+  /* For text gradient */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  /* Text shadow */
   animation: subtleGlow 2s infinite alternate;
 }
 
@@ -193,6 +210,7 @@ div.artist {
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2), 0 0 5px rgba(106, 17, 203, 0.5),
       0 0 10px rgba(37, 117, 252, 0.5);
   }
+
   100% {
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2), 0 0 10px rgba(106, 17, 203, 1),
       0 0 20px rgba(37, 117, 252, 1);
@@ -238,6 +256,7 @@ div.artist {
   padding-left: 46px;
   padding-right: 46px;
 }
+
 /* Original CSS */
 .loadmore {
   background: #fff;
@@ -278,9 +297,11 @@ div.artist {
   0% {
     transform: translateY(0);
   }
+
   50% {
     transform: translateY(-10px);
   }
+
   100% {
     transform: translateY(0);
   }

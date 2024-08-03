@@ -12,10 +12,31 @@
     background-color: #878787;
 }
 
-div.menu {
+/* div.menu {
     display: flex;
     justify-content: center;
+} */
+/* image indicator */
+.menu {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 8px 0;
 }
+.indicator {
+    width: 60px;
+    height: 10px;
+    background-color: gray;
+    margin: 0 5px;
+    transition: width 0.3s, background-color 0.3s;
+}
+.indicator.active {
+    width: 10px;
+    height: 10px;
+    background-color: black;
+    border-radius: 50%;
+}
+
 
 div.menu2 {
     display: flex;

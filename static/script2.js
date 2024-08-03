@@ -70,7 +70,7 @@ if (device_type == "desktop") { // add mouse move listener
         const mouseX = e.clientX;
         const mouseY = e.clientY;
 
-        if (count == 1) {
+        if (fullMode) {
             // console.log("in floating mode.");
             // console.log(x, y);
             loc = calculate_image_position(mouseX, mouseY);
