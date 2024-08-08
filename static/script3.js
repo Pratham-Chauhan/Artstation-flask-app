@@ -67,8 +67,11 @@ function goToPrevImage() {
 document.addEventListener("click", (event) => {
     const width = window.innerWidth;
     const clickPosition = event.clientX;
-    const threshold = window.innerWidth * 0.1; // 10% of the window width
 
+    var threshold = window.innerWidth * 0.1; // 10% of the window width
+    if (device_type == "mobile") {
+        threshold = window.innerWidth * 0.16; // 20% of the window width (mobile)
+    }
     console.log("Clicked on", event.target.id, clickPosition, width);
 
     if (clickPosition < threshold) {// Clicked on the left side
@@ -92,6 +95,7 @@ document.addEventListener("keydown", (event) => {
     }
 });
 
+// HD mode
 let hdMode = false;
 document.addEventListener("contextmenu", (event) => {
     if (event.target.id == "viewer") {

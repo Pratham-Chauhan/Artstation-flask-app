@@ -28,14 +28,16 @@
         images.push(img);
     });
     // console.log('All images preloaded!');
-
-    // preload HD images
-    const HD_images = [];
-    imageUrls.forEach((url) => {
-        const img = new Image();
-        img.src = url.replace('/large/', '/4k/');
-        HD_images.push(img);
-    });
+    
+    // preload HD images only on desktop
+    if (device_type == "desktop") {
+        const HD_images = [];
+        imageUrls.forEach((url) => {
+            const img = new Image();
+            img.src = url.replace('/large/', '/4k/');
+            HD_images.push(img);
+        });
+    }
 
 </script>
 

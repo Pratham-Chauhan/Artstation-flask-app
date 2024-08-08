@@ -6,7 +6,12 @@
     <meta name="viewport" content="width=815, initial-scale=0.44" />
     <title>ArtStation Gallery</title>
     <!-- font from google fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+    <!-- <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet"> -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
+
 
     <link rel="stylesheet" href="{{ url_for('static', filename='main_style.css')}}" />
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -89,14 +94,21 @@
 
 
     <script>
-        // change color of like button to pink (enable)
-        $(".like").on("click", function () {
+    // change color of like button to pink (enable)
+    $(".like").on("click", function() {
+        $(this).toggleClass("liked");
+        if ($(this).hasClass("liked")) {
             $(this).css({
-                filter: "invert(50%) sepia(100%) saturate(5000%) hue-rotate(5.7rad)",
-                opacity: "100%",
+                'filter': "invert(50%) sepia(100%) saturate(5000%) hue-rotate(5.7rad)",
+                'opacity': '100%'
             });
-        });
-
+        } else {
+            $(this).css({
+                'filter': "",
+                'opacity': ''
+            });
+        }
+    });
         
         // $(window).on('scroll', function() {
         //     var scrollPosition = $(window).scrollTop(); // Get the vertical scroll position

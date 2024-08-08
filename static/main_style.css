@@ -190,10 +190,12 @@ div.artist {
     background-position-x: 200%;
   }
 }
-
+.footer {
+  font-family: 'Raleway';
+}
 .footer #your-name {
   font-weight: bold;
-  /* font-family: 'Open Sans', sans-serif; */
+  /* font-family: 'Raleway', sans-serif; */
   background: linear-gradient(to right, #6a11cb, #2575fc);
   /* Gradient color */
   -webkit-background-clip: text;

@@ -138,5 +138,5 @@ def view_art(art_hash: str):
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
     # app.run(debug=True)
+    app.run(host="192.168.75.34", debug=True)
