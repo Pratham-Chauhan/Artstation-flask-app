@@ -44,6 +44,10 @@ div.menu2 {
     justify-content: space-between;
 }
 
+#wrapper {
+    display: flex;
+}
+
 #viewer {
     /*scale: 50%;*/
     position: relative;
@@ -60,20 +64,15 @@ div.menu2 {
     box-shadow: 3px 4px 10px rgba(0, 0, 0, 0.3); /* Subtle shadow for depth */
 
     width: 100%;
-    /* margin: auto; */
+    /* margin: auto; plz dont' enable this! it would mess up left and top positioning */
+    display: block;
+
+    object-fit: contain;
+    
 
     cursor: pointer;
 }
 
-
-#wrapper {
-    display: flex;
-    /* height: 100vh; */
-    /*                 justify-content: center; */
-
-    /*				white-space: nowrap;*/
-    /*				overflow:scroll;*/
-}
 
 .icon {
     width: 40px;
