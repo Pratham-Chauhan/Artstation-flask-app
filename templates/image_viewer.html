@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
-
-<head>
+  <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title>Art Viewer</title>
@@ -9,59 +8,63 @@
     <meta name="viewport" content="width=700, initial-scale=0.5" />
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
     <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css"> -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='viewer.css')}}" />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='viewer.css')}}"
+    />
 
     <script src="{{ url_for('static', filename='script1.js') }}"></script>
     <script src="{{ url_for('static', filename='script2.js') }}"></script>
-</head>
-<script>
+  </head>
+  <script>
     // loads all the image urls
     const imageUrls = {{ full_url['Image Links'] | tojson }};
-    // imageUrls.push({{ full_url['Cover Art'] }});  
+    // imageUrls.push({{ full_url['Cover Art'] }});
 
     // Preload images upto 3 images
     const images = [];
     // imageUrls.slice(0, 3)
     imageUrls.forEach((url) => {
-        const img = new Image();
-        img.src = url;
-        images.push(img);
+      const img = new Image();
+      img.src = url;
+      images.push(img);
     });
     // console.log('All images preloaded!');
-    
+
     // preload HD images only on desktop
     if (device_type == "desktop") {
-        const HD_images = [];
-        imageUrls.forEach((url) => {
-            const img = new Image();
-            img.src = url.replace('/large/', '/4k/');
-            HD_images.push(img);
-        });
+      const HD_images = [];
+      imageUrls.forEach((url) => {
+        const img = new Image();
+        img.src = url.replace('/large/', '/4k/');
+        HD_images.push(img);
+      });
     }
+  </script>
 
-</script>
-
-<body>
+  <body>
     <div class="menu"></div>
     <div class="menu2">
-        <h4 id="size_info"></h4>
-        <h2 id="title">
-            <a href="https://www.artstation.com/artwork/{{hash}}" target="_blank">
-                {{ full_url['Title'] }}
-            </a>
-        </h2>
+      <h4 id="size_info"></h4>
+      <h2 id="title">
+        <a href="https://www.artstation.com/artwork/{{hash}}" target="_blank">
+          {{ full_url['Title'] }}
+        </a>
+      </h2>
 
-        <!-- download button -->
-        <a class="link" href="{{ full_url[0] }}" target="_blank">
-            <img class="svg icon" src="{{ url_for('static', filename='download_icon.svg')}}" /></a>
+      <!-- download button -->
+      <a class="link" href="{{ full_url[0] }}" target="_blank">
+        <img
+          class="svg icon"
+          src="{{ url_for('static', filename='download_icon.svg')}}"
+      /></a>
     </div>
 
     <div id="wrapper">
-        <div id="loading">Loading...</div>
-        <img id="viewer"/>
+      <div id="loading">Loading...</div>
+      <img id="viewer" />
     </div>
 
     <script src="{{ url_for('static', filename='script3.js') }}"></script>
-</body>
-
+  </body>
 </html>

@@ -92,25 +92,35 @@ document.addEventListener("keydown", (event) => {
   } else if (event.key === "ArrowRight") {
     goToNextImage();
   } else if (event.key === "0") {
+    // Fit to Screen
 
-      if (!isKeyDown) {
-        isKeyDown = true;
-        console.log("Fit to Screen");
+    if (!isKeyDown) {
+      isKeyDown = true;
+      console.log("Fit to Screen");
+
+      if (!fullMode) {
         hide_menu();
-    
-        $("#wrapper").css({
-          height: "100vh",
-          width: "100vw",
-        });
-    
-        $("#viewer").css({
-          "pointer-events": "none",
-          "max-width": "100%",
-          "max-height": "100%",
-          margin: "auto",
-        });
-        $("body").css({ overflow: "hidden" });
-        
+      }
+
+      $("#wrapper").css({
+        height: "100vh",
+        width: "100vw",
+      });
+
+      $("#viewer").css({
+        "pointer-events": "none",
+        width: "",
+        "max-width": "100%",
+        "max-height": "100%",
+        margin: "auto",
+        "box-shadow": "none",
+      });
+
+      $("body").css({
+        overflow: "hidden",
+        // background: 'linear-gradient(black, hsl(67, 48%, 49%)) rgb(237, 237,
+        // 237)'
+      });
     }
   }
 });
@@ -122,6 +132,9 @@ document.addEventListener("keyup", (event) => {
     if (!fullMode) {
       unhide_menu();
       $("body").css({ overflow: "" });
+      $("#viewer").css({ width: "100%" });
+    } else {
+      $("#viewer").css({ width: "auto" });
     }
 
     $("#wrapper").css({
@@ -134,7 +147,10 @@ document.addEventListener("keyup", (event) => {
       "max-width": "",
       "max-height": "",
       margin: "",
+      "box-shadow": "",
     });
+
+    $("body").css({ background: "" });
   }
 });
 
