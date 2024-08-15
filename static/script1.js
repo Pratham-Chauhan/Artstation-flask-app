@@ -54,7 +54,7 @@ function scrollToMiddle(element) {
   });
 }
 
-function hide_menu() {
+function hide_menu(show_animation=true) {
   document.body.style.backgroundColor = "#242424"; // dark
 
   $("#viewer").css({
@@ -63,25 +63,30 @@ function hide_menu() {
   }); //  reset the image size and remove the border
   window.scrollTo(0, 0);
 
-  // hide top panel
-  // $(".menu").css({ display: "none" });
-  // $(".menu2").css({ display: "none" });
 
   
-  // Hide top panel with custom animation
-  $(".menu").animate({
-      padding: 0,
-      height: 0,
-      opacity: 0
-    }, 250);
-  $(".menu2").animate({
-      height: 0,
-      opacity: 0
-    }, 250);
+  if (show_animation) {
+    // Hide top panel with custom animation
+    $(".menu").animate({
+        padding: 0,
+        height: 0,
+        opacity: 0
+      }, 250);
+      
+    $(".menu2").animate({
+        height: 0,
+        opacity: 0
+      }, 250);
+  } else {
+    // hide top panel
+    $(".menu").css({ display: "none" });
+    $(".menu2").css({ display: "none" });
+
+  }
 
 }
 
-function unhide_menu() {
+function unhide_menu(show_animation=true) {
   console.log("unhide menu");
 
   
@@ -96,21 +101,25 @@ function unhide_menu() {
   });
 
 
-  // $(".menu").css({ display: "flex" });
-  // $(".menu2").css({ display: "flex" });
 
+  if (show_animation) {
+    $(".menu").css({ height: "auto", padding: "8px" });
+    $(".menu2").css({ height: "auto" });
+  
+    // Restore top panel with custom animation
+    $(".menu").animate({
+        opacity: 1,
+      }, 300);
+  
+    $(".menu2").animate({
+        opacity: 1,
+      }, 300);
+  } else {
 
-  $(".menu").css({ height: "auto", padding: "8px" });
-  $(".menu2").css({ height: "auto" });
+    $(".menu").css({ display: "flex" });
+    $(".menu2").css({ display: "flex" });
+  }
 
-  // Restore top panel with custom animation
-  $(".menu").animate({
-      opacity: 1,
-    }, 300);
-
-  $(".menu2").animate({
-      opacity: 1,
-    }, 300);
 
   $("body").css({ overflow: "auto" });
 }
@@ -128,7 +137,7 @@ function fullview(event) {
   if (!fullMode) {
     fullMode = !fullMode;
 
-    hide_menu();
+    hide_menu(show_animation=false);
 
     if (device_type == "desktop") {
       // show the image relocation animation
@@ -184,6 +193,6 @@ function fullview(event) {
     // normal view
     fullMode = !fullMode;
 
-    unhide_menu();
+    unhide_menu(show_animation=false);
   }
 }

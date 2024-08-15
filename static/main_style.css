@@ -6,6 +6,7 @@
 .main {
   display: flex;
   height: 67px;
+  align-items: center;
 }
 
 .container {
@@ -143,12 +144,13 @@ div.artist {
   padding: 5px;
   background-color: #f9f9f9;
   border-top: 1px solid #ddd; */
-
   position: fixed;
   bottom: 0;
   right: 0;
-
-  font-size: 14px;
+  
+  font-family: 'Raleway';
+  /* font-size: 14px; */
+  font-size: 1.2rem;
   color: #b3b3b3;
   padding: 10px 20px;
   background-color: #0c0c0c;
@@ -190,9 +192,7 @@ div.artist {
     background-position-x: 200%;
   }
 }
-.footer {
-  font-family: 'Raleway';
-}
+
 .footer #your-name {
   font-weight: bold;
   /* font-family: 'Raleway', sans-serif; */
@@ -240,24 +240,94 @@ div.artist {
   }
 } */
 
+.long-line {
+  height: 4px;
+  margin-top: -1px;
+  background-color: #fff;
+}
+
 #heading {
   background-color: black;
   color: white;
   display: flex;
   align-items: center;
   height: 67px;
-  font: bold 27px sans-serif;
+  font: bold 27px 'Raleway';
   padding-left: 16px;
-  margin-bottom: 10px;
+  /* margin-bottom: 10px; */
   flex-grow: 2;
-}
 
-.shuffle {
+}
+#heading p {
+  font-weight: 600;
+  /* background-color: #3e44ca;    */
+  background: linear-gradient( to right, #3e44ca, #a044ff);
+  border-radius: 10px;
+
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+  padding-left: 0.5rem;
+  border-radius: 13px;
+  padding-right: 0.5rem;
+}
+/* .shuffle {
   width: 67px;
   margin: auto;
   padding-left: 46px;
   padding-right: 46px;
+} */
+
+.shuffle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 67px;
+  height: 67px;
+  filter: invert(1);
 }
+
+.shuffle a svg {
+  width: 100%;
+  height: 100%;
+}
+
+.shuffle {
+  perspective: 100px; /* adds depth to the animation */
+}
+
+.shuffle.icon {
+  transition: transform 0.5s; /* smooth transition */
+  transform-style: preserve-3d; /* enables 3D transformations */
+}
+
+.shuffle.icon.flipped {
+  transform: rotateX(180deg); /* flips the icon */
+}
+
+.shuffle.icon.animating {
+  animation: flip 0.5s; /* animation duration */
+}
+
+@keyframes flip {
+  0% {
+    transform: rotateX(0deg);
+  }
+  50% {
+    transform: rotateX(180deg);
+    animation-timing-function: cubic-bezier(0.55, 0.085, 0.68, 0.53); /* jerk-like animation */
+  }
+  100% {
+    transform: rotateX(180deg);
+    animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1); /* friction-like animation */
+  }
+}
+
+
+
+
+
+
+
 
 /* Original CSS */
 .loadmore {

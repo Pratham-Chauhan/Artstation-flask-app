@@ -150,7 +150,7 @@ document.addEventListener("keyup", (event) => {
       "box-shadow": "",
     });
 
-    $("body").css({ background: "" });
+    // $("body").css({ background: "" });
   }
 });
 

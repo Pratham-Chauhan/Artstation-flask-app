@@ -1,168 +1,226 @@
 <!DOCTYPE html>
 <html>
-
-<head>
+  <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=815, initial-scale=0.44" />
     <title>ArtStation Gallery</title>
     <!-- font from google fonts -->
     <!-- <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet"> -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
 
-
-
-    <link rel="stylesheet" href="{{ url_for('static', filename='main_style.css')}}" />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='main_style.css')}}"
+    />
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-</head>
+  </head>
 
-<body>
+  <body>
     <div class="main">
-        <div id="heading">
-            <p>Trending Page - {{page}}</p>
-        </div>
-        <div class="shuffle icon" style="filter: invert(1)">
-            <a href="/">
-                <?xml version="1.0" ?><svg data-name="Layer 1" id="Layer_1" viewBox="0 0 100 100"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <title />
-                    <path
-                        d="M50,5A45,45,0,1,0,94.99994,50,45.00023,45.00023,0,0,0,50,5Zm0,88A43,43,0,1,1,80.40564,80.40552,42.86126,42.86126,0,0,1,50,93Z" />
-                    <path
-                        d="M45.19934,53.04419l-4.48852,7.92694A4.00047,4.00047,0,0,1,37.22949,63H26a1,1,0,0,0,0,2H37.22949a6.00091,6.00091,0,0,0,5.22168-3.04333l3.8974-6.88306Z" />
-                    <path
-                        d="M50.94513,46.95581l4.48852-7.92694A4.00022,4.00022,0,0,1,58.915,37H71.58563l-4.29278,4.29291a1,1,0,1,0,1.4143,1.41418l5.99994-6a1.00006,1.00006,0,0,0,0-1.41418l-6-6a1,1,0,1,0-1.41418,1.41418h-.00006L71.58575,35H58.915a6.00067,6.00067,0,0,0-5.22174,3.04333l-3.8974,6.88306Z" />
-                    <path
-                        d="M74.70709,64.70709a1.00006,1.00006,0,0,0,0-1.41418l-6-6a1,1,0,1,0-1.41418,1.41418h-.00006L71.58575,63H58.915a4.00059,4.00059,0,0,1-3.48145-2.02893L42.45123,38.0434A6.00073,6.00073,0,0,0,37.22949,35H26a1,1,0,0,0,0,2H37.22949a4.0003,4.0003,0,0,1,3.48139,2.02893L53.69324,61.9566A6.001,6.001,0,0,0,58.915,65H71.58563l-4.29278,4.29291a1,1,0,1,0,1.4143,1.41418Z" />
-                </svg>
-            </a>
-        </div>
+      <div id="heading">
+        <div style=" padding: 8px;">
+        <svg
+          data-id="4"
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="h-6 w-6 text-white"
+        >
+          <polyline points="22 7 13.5 15.5 8.5 10.5 2 17"></polyline>
+          <polyline points="16 7 22 7 22 13"></polyline>
+        </svg>
     </div>
-    <div id="devicesize" style="display: none;"></div>
-    <div style="color: white">
-        <input type="checkbox" id="toggle_artist" onclick="toggle()" />Show Artist Name
+        <p>Trending Page - {{page}}</p>
+      </div>
+      <div class="shuffle icon" id="shuffle-icon" style="filter: invert(1)">
+        <!-- <a href="/"> -->
+            <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="44"
+            height="44"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <path d="M2 18h1.4c1.3 0 2.5-.6 3.3-1.7l6.1-8.6c.7-1.1 2-1.7 3.3-1.7H22" />
+            <path d="m18 2 4 4-4 4" />
+            <path d="M2 6h1.9c1.5 0 2.9.9 3.6 2.2" />
+            <path d="M22 18h-5.9c-1.3 0-2.6-.7-3.3-1.8l-.5-.8" />
+            <path d="m18 14 4 4-4 4" />
+          </svg>
+          <!-- <svg
+            data-name="Layer 1"
+            id="Layer_1"
+            viewBox="0 0 100 100"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M50,5A45,45,0,1,0,94.99994,50,45.00023,45.00023,0,0,0,50,5Zm0,88A43,43,0,1,1,80.40564,80.40552,42.86126,42.86126,0,0,1,50,93Z"
+            />
+            <path
+              d="M45.19934,53.04419l-4.48852,7.92694A4.00047,4.00047,0,0,1,37.22949,63H26a1,1,0,0,0,0,2H37.22949a6.00091,6.00091,0,0,0,5.22168-3.04333l3.8974-6.88306Z"
+            />
+            <path
+              d="M50.94513,46.95581l4.48852-7.92694A4.00022,4.00022,0,0,1,58.915,37H71.58563l-4.29278,4.29291a1,1,0,1,0,1.4143,1.41418l5.99994-6a1.00006,1.00006,0,0,0,0-1.41418l-6-6a1,1,0,1,0-1.41418,1.41418h-.00006L71.58575,35H58.915a6.00067,6.00067,0,0,0-5.22174,3.04333l-3.8974,6.88306Z"
+            />
+            <path
+              d="M74.70709,64.70709a1.00006,1.00006,0,0,0,0-1.41418l-6-6a1,1,0,1,0-1.41418,1.41418h-.00006L71.58575,63H58.915a4.00059,4.00059,0,0,1-3.48145-2.02893L42.45123,38.0434A6.00073,6.00073,0,0,0,37.22949,35H26a1,1,0,0,0,0,2H37.22949a4.0003,4.0003,0,0,1,3.48139,2.02893L53.69324,61.9566A6.001,6.001,0,0,0,58.915,65H71.58563l-4.29278,4.29291a1,1,0,1,0,1.4143,1.41418Z"
+            />
+          </svg> -->
+        <!-- </a> -->
+      </div>
     </div>
+    <div id="devicesize" style="display: none"></div>
+    <div style="color:white; display: none;">
+      <input type="checkbox" id="toggle_artist" onclick="toggle()" />Show Artist Name
+    </div>
+    <div class="long-line"></div>
 
-
-
-    
     <div id="wrapper">
-        <div class="spaces"></div>
-                <div class="container">
-                {% for art in urls %}
+      <div class="spaces"></div>
+      <div class="container">
+        {% for art in urls %}
 
-                <div class="art {{ art.hash }}" style="display: none">
-                    <div style="position: absolute; overflow: hidden">
-                        <img class="blur_bg" src="{{ art.URL }}" />
-                    </div>
+        <div class="art {{ art.hash }}" style="display: none">
+          <div style="position: absolute; overflow: hidden">
+            <img class="blur_bg" src="{{ art.URL }}" />
+          </div>
 
-                    <div style="position: absolute; overflow: hidden">
-                        <img class="dark_overlay" src="{{ art.URL }}" />
-                    </div>
+          <div style="position: absolute; overflow: hidden">
+            <img class="dark_overlay" src="{{ art.URL }}" />
+          </div>
 
-                    <div style="position: relative">
-                        <a href="/view/{{ art.hash }}" target="_blank" class="view">
-                            <img src="{{ art.URL }}" />
-                        </a>
-                        <img class="like icon" src="/static/like_bt.png" />
-                    </div>
+          <div style="position: relative">
+            <a href="/view/{{ art.hash }}" target="_blank" class="view">
+              <img src="{{ art.URL }}" />
+            </a>
+            <img class="like icon" src="/static/like_bt.png" />
+          </div>
 
-                    <div class="artist">
-                        <img src="{{ art.artist_img }}" />
-                        <a href="https://www.artstation.com/{{ art.artist_url }}" target="_blank">{{ art.artist }}</a>
-                    </div>
-                </div>
-
-                {% endfor %}
-            </div>
-        
-        <div class="spaces"></div>
+          <div class="artist">
+            <img src="{{ art.artist_img }}" />
+            <a
+              href="https://www.artstation.com/{{ art.artist_url }}"
+              target="_blank"
+              >{{ art.artist }}</a
+            >
+          </div>
         </div>
 
+        {% endfor %}
+      </div>
+
+      <div class="spaces"></div>
+    </div>
 
     <div class="loadmore" onclick="loads()">
-        <div class="glow"></div>
-        <div class="loadmore-text">Load More</div>
-      </div>
+      <div class="glow"></div>
+      <div class="loadmore-text">Load More</div>
+    </div>
 
     <!-- <div class="loadmore" onclick="loads()">Load More</div> -->
 
     <!-- footer -->
-    <div class="footer">Made by <span id="your-name">Pratham Chauhan</span></div>
-
-
+    <div class="footer">
+      Made by <span id="your-name">Pratham Chauhan</span>
+    </div>
 
     <script>
-    // change color of like button to pink (enable)
-    $(".like").on("click", function() {
+      // change color of like button to pink (enable)
+      $(".like").on("click", function () {
         $(this).toggleClass("liked");
         if ($(this).hasClass("liked")) {
-            $(this).css({
-                'filter': "invert(50%) sepia(100%) saturate(5000%) hue-rotate(5.7rad)",
-                'opacity': '100%'
-            });
+          $(this).css({
+            filter:
+              "invert(50%) sepia(100%) saturate(5000%) hue-rotate(5.7rad)",
+            opacity: "100%",
+          });
         } else {
-            $(this).css({
-                'filter': "",
-                'opacity': ''
+          $(this).css({
+            filter: "",
+            opacity: "",
+          });
+        }
+      });
+
+      // $(window).on('scroll', function() {
+      //     var scrollPosition = $(window).scrollTop(); // Get the vertical scroll position
+      //     $('body').css('background-position-y', scrollPosition + 'px'); // Update the background-position-y
+      // });
+    </script>
+
+    <script>
+      var e = document.getElementById("devicesize");
+      var art = document.getElementsByTagName("img");
+
+      e.innerHTML = `${window.screen.width} x ${window.screen.height} - ${art[0].naturalWidth}, ${art[0].naturalWidth}, ${document.body.clientWidth}`;
+
+      var checkBox = document.getElementById("toggle_artist");
+      checkBox.checked = true;
+      function toggle() {
+        var text = document.querySelectorAll(".artist");
+
+        if (checkBox.checked == true) {
+          text.forEach(function (i) {
+            i.style.display = "flex";
+          });
+        } else {
+          text.forEach(function (i) {
+            i.style.display = "none";
+          });
+        }
+      }
+    </script>
+    <script>
+      var count = 0;
+      function loads() {
+        // show more art
+
+        var items = document.querySelectorAll(".art");
+        items = Array.from(items);
+
+        // add 8 rows
+        for (let i = 3 * count; i < 3 * (count + 8) && i < 99; i++) {
+          items[i].style.display = "block";
+        }
+        count += 8;
+        console.log(count);
+
+        // hide load more button at the end of page
+        if (3 * count >= 100) {
+          var load_bt = document.querySelector(".loadmore");
+          console.log(load_bt);
+          load_bt.style.display = "none";
+          return;
+        }
+      }
+      loads();
+    </script>
+
+    <script>
+        const shuffleIcon = document.getElementById('shuffle-icon');
+
+        shuffleIcon.addEventListener('click', () => {
+            shuffleIcon.classList.add('animating');
+            shuffleIcon.addEventListener('animationend', () => {
+                shuffleIcon.classList.remove('animating');
+                shuffleIcon.classList.toggle('flipped');
             });
-        }
-    });
-        
-        // $(window).on('scroll', function() {
-        //     var scrollPosition = $(window).scrollTop(); // Get the vertical scroll position
-        //     $('body').css('background-position-y', scrollPosition + 'px'); // Update the background-position-y
-        // });
+        });
     </script>
-
-    <script>
-        var e = document.getElementById("devicesize");
-        var art = document.getElementsByTagName("img");
-
-        e.innerHTML = `${window.screen.width} x ${window.screen.height} - ${art[0].naturalWidth}, ${art[0].naturalWidth}, ${document.body.clientWidth}`;
-
-        var checkBox = document.getElementById("toggle_artist");
-        checkBox.checked = true;
-        function toggle() {
-            var text = document.querySelectorAll(".artist");
-
-            if (checkBox.checked == true) {
-                text.forEach(function (i) {
-                    i.style.display = "flex";
-                });
-            } else {
-                text.forEach(function (i) {
-                    i.style.display = "none";
-                });
-            }
-        }
-    </script>
-    <script>
-        var count = 0;
-        function loads() {
-            // show more art
-
-            var items = document.querySelectorAll(".art");
-            items = Array.from(items);
-
-            // add 8 rows
-            for (let i = 3 * count; i < 3 * (count + 8) && i < 99; i++) {
-                items[i].style.display = "block";
-            }
-            count += 8;
-            console.log(count);
-            
-            // hide load more button at the end of page
-            if (3 * count >= 100) {
-                var load_bt = document.querySelector(".loadmore");
-                console.log(load_bt);
-                load_bt.style.display = "none";
-                return;
-            }
-        }
-        loads();
-    </script>
-</body>
-
+  </body>
 </html>
