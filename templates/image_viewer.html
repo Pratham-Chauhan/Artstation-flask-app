@@ -56,7 +56,7 @@
       <a class="link" href="{{ full_url[0] }}" target="_blank">
         <img
           class="svg icon"
-          src="{{ url_for('static', filename='download_icon.svg')}}"
+          src="{{ url_for('static', filename='icons/download_icon.svg')}}"
       /></a>
     </div>
 
@@ -65,6 +65,68 @@
       <img id="viewer" />
     </div>
 
+    <!-- Floating help icon -->
+    <div id="help-icon">
+      <img
+        src="/static/icons/info_icon.png"
+        style="width: 30px; height: 30px"
+      />
+    </div>
+
+    <!-- Help popup box -->
+    <div id="help-popup" style="display: none">
+      <h3>Keyboard Shortcuts and Navigation</h3>
+      <table style="border-collapse: separate; border-spacing: 0 10px">
+        <tr>
+          <td style="padding-right: 15px">
+            <img src="/static/icons/left.png" />
+          </td>
+          <td>Previous Image</td>
+        </tr>
+        <tr>
+          <td style="padding-right: 15px">
+            <img src="/static/icons/right.png" />
+          </td>
+          <td>Next Image</td>
+        </tr>
+        <tr>
+          <td style="padding-right: 15px">
+            <img src="/static/icons/square-0.png" />
+          </td>
+          <td>Fit to Screen</td>
+        </tr>
+
+        <tr>
+          <td style="padding-right: 15px">
+            <img src="/static/icons/left-click (2).png" />
+          </td>
+          <td>Floating Mode</td>
+        </tr>
+
+        <tr>
+          <td style="padding-right: 15px">
+            <img src="/static/icons/scroll (1).png" />
+          </td>
+          <td>Navigate images (in floating mode)</td>
+        </tr>
+        <tr>
+          <td style="padding-right: 15px">
+            <img src="/static/icons/right-click.png" />
+          </td>
+          <td>Toggle HD Mode</td>
+        </tr>
+      </table>
+    </div>
+    <script>
+      var showPopup = {{ show_popup|tojson }};
+    </script>
     <script src="{{ url_for('static', filename='script3.js') }}"></script>
   </body>
 </html>
+
+<!-- <a href="https://www.flaticon.com/free-icons/keypad" title="keypad icons">Keypad icons created by Roundicons Premium - Flaticon</a> -->
+<!-- <a href="https://www.flaticon.com/free-icons/keypad" title="keypad icons">Keypad icons created by Roundicons Premium - Flaticon</a> -->
+<!-- <a href="https://www.flaticon.com/free-icons/square-0" title="square-0 icons">Square-0 icons created by iconading - Flaticon</a> -->
+<!-- <a href="https://www.flaticon.com/free-icons/right-click" title="right-click icons">Right-click icons created by Smashicons - Flaticon</a> -->
+<!-- <a href="https://www.flaticon.com/free-icons/scroll-down" title="scroll-down icons">Scroll-down icons created by Smashicons - Flaticon</a> -->
+<!-- <a href="https://www.flaticon.com/free-icons/left-click" title="left-click icons">Left-click icons created by Smashicons - Flaticon</a> -->

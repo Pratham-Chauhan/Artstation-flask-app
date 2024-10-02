@@ -1,10 +1,13 @@
-from flask import Flask, render_template, render_template_string, redirect, make_response, jsonify
+import os
+from flask import Flask, render_template, redirect, session
 import requests as r
 # from random import randint
 import random
 from concurrent.futures import ThreadPoolExecutor
 from threading import Thread
-import re 
+from dotenv import load_dotenv
+import re
+load_dotenv()
 
 
 tdata = []
@@ -13,6 +16,7 @@ img_size = 'medium'
 art_urls = []
 
 cache_urls = dict()
+
 
 def cache_artURL():
     all_hsh = [j['hash'] for j in art_urls[:]]
@@ -51,7 +55,7 @@ def Trending_Art_Extract(page_no: int):
         if artwork['hide_as_adult']:
             print("IT'S ADULT CONTENT: ", artwork['hash_id'])
             continue
-    
+
         art_urls.append({'URL': artwork['smaller_square_cover_url'],
                          'hash': artwork['hash_id'],
                          'title': artwork['title'],
@@ -81,28 +85,27 @@ def download_art(art_hash: str) -> dict:
     if x2.status_code != 200:
         print('Failed to make request.')
         return ['', '', '', '']
-    
+
     x2 = x2.json()
 
-    
     image_url = x2['assets'][0].get('image_url')
 
     links = {
         'Title': x2['title'],
         'Cover Art': x2['cover_url'],
-        'Image Links': [], 
+        'Image Links': [],
         'Video Links': []
-        }   
-    
+    }
+
     for i in x2['assets']:
         if i['has_embedded_player']:
             vid_link = re.findall(r"src='([^']*)'", i['player_embedded'])
             if vid_link:
                 links['Video Links'].append(vid_link)
 
-        else: 
+        else:
             links['Image Links'].append(i['image_url'])
-    
+
     # if cover_art == image_url:
     #     return [cover_art]
 
@@ -112,9 +115,10 @@ def download_art(art_hash: str) -> dict:
 
 
 app = Flask(__name__)
+app.secret_key = os.environ.get('SECRET_KEY')
 
-@app.route('/<int:n>')
-def index(n):
+@app.route('/<int:n>')  
+def index(n):       
     Trending_Art_Extract(n)
     return render_template('home.html', urls=art_urls, page=n)
 
@@ -129,12 +133,20 @@ def go_to_page():
 
 @app.route('/view/<art_hash>')
 def view_art(art_hash: str):
-    cu:dict = cache_urls.get(art_hash)
+
+    # client side session
+    if 'has_seen_popup' not in session.keys():
+        session['has_seen_popup'] = False
+
+    show_popup = not session['has_seen_popup']
+    session['has_seen_popup'] = True
+
+    cu: dict = cache_urls.get(art_hash)
     if cu:
         print('\nFound Cached URLs')
-        return render_template("image_viewer.html", full_url=cu, hash=art_hash)
+        return render_template("image_viewer.html", full_url=cu, hash=art_hash, show_popup=show_popup)
     else:
-        return render_template("image_viewer.html", full_url=download_art(art_hash), hash=art_hash)
+        return render_template("image_viewer.html", full_url=download_art(art_hash), hash=art_hash, show_popup=show_popup)
 
 
 if __name__ == "__main__":
