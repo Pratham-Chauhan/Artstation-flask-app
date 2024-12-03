@@ -69,7 +69,7 @@ def Trending_Art_Extract(page_no: int):
         # cover_url = '/'.join(cover_url).replace("smaller_square", img_size)
     print(len(art_urls))
 
-    Thread(target=cache_artURL).start()
+    # Thread(target=cache_artURL).start()
 
 
 def download_art(art_hash: str) -> dict:
