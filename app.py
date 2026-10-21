@@ -92,7 +92,7 @@ def download_art(art_hash: str) -> dict:
     x2 = get(art_url, headers=headers, http_version="v3", impersonate="chrome")
     print((x2, art_url))
 
-    if x2.status_code not in [200, 403]:
+    if x2.status_code not in [200]:
         print('Failed to make request.')
         return ['', '', '', '']
 
