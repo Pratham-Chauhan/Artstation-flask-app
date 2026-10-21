@@ -1,12 +1,15 @@
 import os
 from flask import Flask, render_template, redirect, session
-import requests as r
+# import requests as r
 # from random import randint
 import random
 from concurrent.futures import ThreadPoolExecutor
 from threading import Thread
 from dotenv import load_dotenv
 import re
+from curl_cffi import get, Session
+
+
 load_dotenv()
 
 
@@ -17,6 +20,10 @@ art_urls = []
 
 cache_urls = dict()
 
+headers = {
+    'accept': 'application/json',
+    'user-agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36',
+}
 
 def cache_artURL():
     all_hsh = [j['hash'] for j in art_urls[:]]
@@ -35,7 +42,8 @@ def Trending_Art_Extract(page_no: int):
         print('refresh is on'.title())
         trend_url = "https://www.artstation.com/api/v2/community/explore/projects/trending.json?page=%s&dimension=all&per_page=100" % (
             page_no)
-        tdata = r.get(trend_url)
+        tdata = get(trend_url, headers=headers)
+
         if tdata.status_code == 200:
             tdata = tdata.json()['data']
             print('images fetch:', len(tdata))
@@ -56,13 +64,18 @@ def Trending_Art_Extract(page_no: int):
             print("IT'S ADULT CONTENT: ", artwork['hash_id'])
             continue
 
-        art_urls.append({'URL': artwork['smaller_square_cover_url'],
-                         'hash': artwork['hash_id'],
-                         'title': artwork['title'],
-                         # artist
-                         'artist': artwork['user']['full_name'],
-                         'artist_url': artwork['user']['username'],
-                         'artist_img': artwork['user']['medium_avatar_url']})
+        d = {
+            # art info
+            'URL': artwork['smaller_square_cover_url'],
+            'hash': artwork['hash_id'],
+            'title': artwork['title'],
+            # artist info
+            'artist': artwork['user']['full_name'],
+            'artist_url': artwork['user']['username'],
+            'artist_img': artwork['user']['medium_avatar_url']
+            }
+        
+        art_urls.append(d)
 
         # cover_url = cover_url.split('/')
         # del cover_url[ cover_url.index('smaller_square') - 1 ]
@@ -73,16 +86,13 @@ def Trending_Art_Extract(page_no: int):
 
 
 def download_art(art_hash: str) -> dict:
-    headers = {
-        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/113.0",
-        "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8",
-        "Accept-Language": "en-US,en;q=0.5",
-    }
+
     print('making requests:', art_hash)
     art_url = f"https://www.artstation.com/projects/{art_hash}.json"
-    x2 = r.get(art_url, headers=headers)
+    x2 = get(art_url, headers=headers, http_version="v3", impersonate="chrome")
     print((x2, art_url))
-    if x2.status_code != 200:
+
+    if x2.status_code not in [200, 403]:
         print('Failed to make request.')
         return ['', '', '', '']
 
